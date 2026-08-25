@@ -1,0 +1,32 @@
+# Public, non-operational example.
+# This file documents a protocol shape; it is not a private runner configuration.
+run_id: public-sandbox-example
+substrate:
+  kind: synthetic-2d
+  state_visibility: declared-observation-only
+  biological_equivalence: false
+action_space:
+  kind: discrete
+  actions: [hold, east, west, north, south]
+policy:
+  kind: current-state-only
+  privileged_information: false
+memory:
+  kind: none
+objective:
+  kind: reach-target-after-perturbation
+perturbation:
+  kind: regime-change
+  state_retained: true
+metrics:
+  - success_post
+  - recovery
+  - transfer
+statistics:
+  paired_unit: scenario-seed
+  uncertainty: bootstrap
+status: computational-demonstration
+interpretation_boundary:
+  biological_claim: false
+  intelligence_claim: false
+  memory_causal_claim: false

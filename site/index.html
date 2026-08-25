@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e16">
+  <meta name="description" content="Organoid Intelligence — an open research record investigating what evidence can and cannot support about learning, prediction, memory and intelligence.">
+  <title>Organoid Intelligence — Investigated without shortcuts</title>
+  <style>
+    :root {
+      --ink: #0b0e16;
+      --ink-2: #121725;
+      --paper: #f2efe8;
+      --paper-2: #e8e4db;
+      --muted: #a9b0bf;
+      --muted-dark: #626b78;
+      --line: rgba(242,239,232,.16);
+      --line-dark: rgba(11,14,22,.14);
+      --lime: #d5f36f;
+      --coral: #ff846d;
+      --sky: #9bd8e5;
+      --violet: #c9b8ff;
+      --serif: Georgia, 'Times New Roman', serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--ink); color: var(--paper); font-family: var(--sans); line-height: 1.5; }
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow { color: var(--lime); font: 600 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+    .kicker { color: var(--muted); font-size: 14px; max-width: 600px; }
+    .serif { font-family: var(--serif); font-weight: 400; }
+    .topbar { position: sticky; top: 0; z-index: 20; background: rgba(11,14,22,.9); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); }
+    .topbar-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--paper); text-decoration: none; font-weight: 700; letter-spacing: -.02em; }
+    .brand-mark { width: 18px; height: 18px; border: 2px solid var(--lime); border-radius: 50%; position: relative; }
+    .brand-mark:after { content: ''; position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); top: 4px; left: 4px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 18px; justify-content: flex-end; }
+    .nav a { color: var(--muted); font: 11px/1 var(--mono); text-decoration: none; letter-spacing: .06em; text-transform: uppercase; }
+    .nav a:hover { color: var(--lime); }
+    .hero { min-height: 720px; display: grid; align-items: center; padding: 96px 0 92px; position: relative; overflow: hidden; }
+    .hero:before { content: ''; position: absolute; width: 620px; height: 620px; border-radius: 50%; border: 1px solid rgba(213,243,111,.12); right: -210px; top: 70px; box-shadow: 0 0 0 42px rgba(213,243,111,.025), 0 0 0 118px rgba(213,243,111,.02); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 70px; align-items: center; position: relative; }
+    h1 { font: 400 clamp(54px, 8vw, 104px)/.92 var(--serif); letter-spacing: -.07em; margin: 20px 0 28px; max-width: 760px; }
+    .hero-copy { font-size: 18px; line-height: 1.55; color: #d8d9db; max-width: 600px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .button { display: inline-flex; align-items: center; gap: 10px; padding: 13px 16px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; font-size: 13px; transition: .2s ease; }
+    .button.primary { background: var(--lime); border-color: var(--lime); color: var(--ink); font-weight: 700; }
+    .button:hover { transform: translateY(-2px); border-color: var(--lime); }
+    .evidence-orbit { min-height: 440px; position: relative; display: grid; place-items: center; }
+    .orbit { width: min(410px, 85vw); aspect-ratio: 1; border: 1px solid rgba(213,243,111,.38); border-radius: 50%; position: relative; display: grid; place-items: center; box-shadow: 0 0 0 1px rgba(213,243,111,.06), inset 0 0 50px rgba(213,243,111,.05); }
+    .orbit:before, .orbit:after { content: ''; position: absolute; border: 1px solid rgba(155,216,229,.26); border-radius: 50%; }
+    .orbit:before { inset: 42px; }
+    .orbit:after { inset: 105px; border-color: rgba(255,132,109,.28); }
+    .core { width: 122px; height: 122px; border-radius: 50%; background: var(--lime); color: var(--ink); display: grid; place-items: center; text-align: center; padding: 20px; font: 700 12px/1.15 var(--mono); text-transform: uppercase; letter-spacing: .07em; box-shadow: 0 0 0 13px rgba(213,243,111,.08), 0 0 54px rgba(213,243,111,.25); }
+    .orbit-label { position: absolute; padding: 8px 10px; border: 1px solid var(--line); background: rgba(18,23,37,.78); color: var(--paper); font: 10px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .label-a { top: 9%; left: 9%; } .label-b { top: 30%; right: 3%; } .label-c { bottom: 10%; right: 18%; } .label-d { bottom: 19%; left: 4%; }
+    .section { padding: 112px 0; }
+    .section.paper { background: var(--paper); color: var(--ink); }
+    .section.ink-2 { background: var(--ink-2); }
+    .section-head { display: flex; justify-content: space-between; gap: 42px; align-items: end; margin-bottom: 48px; }
+    h2 { font: 400 clamp(40px, 6vw, 74px)/.95 var(--serif); letter-spacing: -.06em; margin: 14px 0 0; max-width: 740px; }
+    h3 { font: 400 28px/1.05 var(--serif); margin: 0 0 14px; letter-spacing: -.03em; }
+    .section-head .kicker { max-width: 350px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); }
+    .metric { padding: 25px 18px 27px 0; border-right: 1px solid var(--line-dark); }
+    .metric + .metric { padding-left: 18px; }
+    .metric:last-child { border-right: 0; }
+    .metric strong { display: block; font: 400 clamp(36px, 5vw, 64px)/1 var(--serif); letter-spacing: -.06em; }
+    .metric span { color: var(--muted-dark); display: block; margin-top: 8px; font: 11px/1.35 var(--mono); text-transform: uppercase; letter-spacing: .05em; }
+    .findings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .finding { background: #fbfaf5; border: 1px solid var(--line-dark); padding: 30px; min-height: 316px; position: relative; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+    .finding:after { content: ''; width: 140px; height: 140px; border-radius: 50%; position: absolute; right: -48px; bottom: -48px; border: 1px solid var(--line-dark); }
+    .finding.no-01 { border-top: 4px solid var(--coral); } .finding.no-02 { border-top: 4px solid var(--lime); } .finding.no-03 { border-top: 4px solid var(--sky); } .finding.no-04 { border-top: 4px solid var(--violet); }
+    .finding-tag { display: flex; justify-content: space-between; gap: 15px; color: var(--muted-dark); font: 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .finding p { color: #4e5660; font-size: 14px; max-width: 470px; }
+    .finding-link { color: var(--ink); font: 600 11px/1 var(--mono); text-decoration: none; text-transform: uppercase; letter-spacing: .06em; }
+    .finding-link:after { content: '  ↗'; color: var(--muted-dark); }
+    .callout { margin-top: 18px; padding: 22px 24px; background: var(--ink); color: var(--paper); font: 18px/1.35 var(--serif); }
+    .callout strong { color: var(--lime); font-weight: 400; }
+    .split { display: grid; grid-template-columns: .75fr 1.25fr; gap: 84px; align-items: start; }
+    .rule-list { border-top: 1px solid var(--line); }
+    .rule { padding: 18px 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 34px 1fr; gap: 18px; }
+    .rule-num { color: var(--coral); font: 12px/1 var(--mono); padding-top: 5px; }
+    .rule p { margin: 0; color: #c6cad2; font-size: 14px; }
+    .rule b { display: block; color: var(--paper); margin-bottom: 4px; font-weight: 600; }
+    .support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); margin-top: 44px; }
+    .support { background: var(--ink-2); padding: 28px; min-height: 190px; }
+    .support .symbol { color: var(--lime); font: 21px/1 var(--mono); margin-bottom: 28px; }
+    .support p { color: var(--muted); font-size: 14px; margin: 0; }
+    .timeline { position: relative; margin-top: 30px; }
+    .timeline:before { content: ''; position: absolute; top: 0; bottom: 0; left: 98px; width: 1px; background: var(--line-dark); }
+    .time-item { display: grid; grid-template-columns: 98px 1fr; gap: 42px; padding: 22px 0 42px; position: relative; }
+    .time-item:before { content: ''; position: absolute; left: 94px; top: 28px; width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 2px solid var(--coral); }
+    .time-step { color: var(--muted-dark); font: 11px/1.2 var(--mono); text-transform: uppercase; letter-spacing: .07em; padding-top: 4px; }
+    .time-item h3 { margin-bottom: 8px; }
+    .time-item p { margin: 0; color: #4e5660; max-width: 670px; font-size: 14px; }
+    .sandbox-panel { border: 1px solid var(--line); padding: 38px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .code-block { background: #070910; border: 1px solid rgba(213,243,111,.18); padding: 24px; color: #ced5c6; font: 12px/1.8 var(--mono); overflow: auto; }
+    .code-key { color: var(--lime); } .code-value { color: var(--sky); } .code-comment { color: #687171; }
+    .sandbox-note { margin-top: 22px; color: var(--muted); font-size: 14px; }
+    .status-band { background: var(--lime); color: var(--ink); padding: 33px 0; }
+    .status-inner { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+    .status-inner p { margin: 0; font: 400 24px/1.15 var(--serif); max-width: 760px; letter-spacing: -.02em; }
+    .status-inner .button { border-color: var(--ink); }
+    footer { padding: 40px 0 60px; color: var(--muted); }
+    .footer-grid { display: flex; justify-content: space-between; gap: 30px; border-top: 1px solid var(--line); padding-top: 22px; font: 11px/1.4 var(--mono); }
+    .footer-grid a { color: var(--paper); text-decoration: none; }
+    .footer-grid a:hover { color: var(--lime); }
+    @media (max-width: 820px) {
+      .wrap { width: min(100% - 32px, 660px); }
+      .nav { gap: 10px; }
+      .nav a:nth-child(n+4) { display: none; }
+      .hero { min-height: auto; padding: 82px 0 68px; }
+      .hero-grid, .split, .sandbox-panel { grid-template-columns: 1fr; gap: 42px; }
+      .evidence-orbit { min-height: 350px; }
+      .section { padding: 78px 0; }
+      .section-head { display: block; }
+      .section-head .kicker { margin-top: 22px; }
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid var(--line-dark); }
+      .metric:nth-child(3) { padding-left: 0; padding-top: 18px; }
+      .findings-grid, .support-grid { grid-template-columns: 1fr; }
+      .timeline:before { left: 76px; }
+      .time-item { grid-template-columns: 76px 1fr; gap: 28px; }
+      .time-item:before { left: 72px; }
+      .status-inner, .footer-grid { display: block; }
+      .status-inner .button { margin-top: 20px; }
+      .footer-grid > * + * { margin-top: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark"></span><span>Organoid Intelligence</span></a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#findings">Findings</a>
+        <a href="#record">Record</a>
+        <a href="#sandbox">Sandbox</a>
+        <a href="#limits">Limits</a>
+        <a href="https://github.com/viniburilux/organoid-intelligence" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Open research record / v0.1</div>
+          <h1>Investigated<br><em>without shortcuts.</em></h1>
+          <p class="hero-copy">An evidence-driven investigation of what biological neural systems can — and cannot — tell us about learning, prediction, memory and intelligence.</p>
+          <div class="actions">
+            <a class="button primary" href="#findings">Read the findings <span>↓</span></a>
+            <a class="button" href="https://github.com/viniburilux/organoid-intelligence/blob/main/docs/research-map.md" target="_blank" rel="noreferrer">Open research map <span>↗</span></a>
+          </div>
+        </div>
+        <div class="evidence-orbit" aria-label="Evidence, experiments and contradictions are connected">
+          <div class="orbit">
+            <div class="core">Evidence<br>before<br>interpretation</div>
+            <span class="orbit-label label-a">Evidence</span>
+            <span class="orbit-label label-b">Experiments</span>
+            <span class="orbit-label label-c">Contradictions</span>
+            <span class="orbit-label label-d">Next question</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section paper" id="findings">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow" style="color:#e45d4d">The public record</div><h2>What did the evidence allow us to conclude?</h2></div>
+          <p class="kicker">Not a single score. A chain of results, limits and changed questions.</p>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong>32 / 16</strong><span>experiments / organoids<br>in the aggregate branch</span></div>
+          <div class="metric"><strong>3</strong><span>tested sessions<br>in the temporal synthesis</span></div>
+          <div class="metric"><strong>7 / 8</strong><span>contiguous blocks<br>with the same direction</span></div>
+          <div class="metric"><strong>1</strong><span>provenance contradiction<br>that changed the interpretation</span></div>
+        </div>
+        <div class="findings-grid" style="margin-top: 38px">
+          <article class="finding no-01">
+            <div class="finding-tag"><span>Finding 01</span><span>Negative / qualified</span></div>
+            <div><h3>Aggregate representations did not beat simple baselines.</h3><p>Firing-rate and network summaries failed to improve experiment-level performance prediction under organoid-held-out evaluation. A rank association did not become calibrated predictive accuracy.</p></div>
+            <a class="finding-link" href="https://github.com/viniburilux/organoid-intelligence/blob/main/evidence/findings.md#finding-01--aggregate-representations-did-not-beat-simple-baselines" target="_blank" rel="noreferrer">Read the full finding</a>
+          </article>
+          <article class="finding no-02">
+            <div class="finding-tag"><span>Finding 02</span><span>Positive / bounded</span></div>
+            <div><h3>Temporal structure carried incremental predictive information.</h3><p>Simple burst/backbone features added short-horizon predictive information beyond population-rate lags in the tested sessions, under time-blocked, training-only feature derivation.</p></div>
+            <a class="finding-link" href="https://github.com/viniburilux/organoid-intelligence/blob/main/evidence/findings.md#finding-02--temporal-structure-carried-incremental-predictive-information" target="_blank" rel="noreferrer">Read the full finding</a>
+          </article>
+          <article class="finding no-03">
+            <div class="finding-tag"><span>Finding 03</span><span>Provenance</span></div>
+            <div><h3>Replication exposed a provenance problem.</h3><p>Files with different whole-file digests contained exactly equal targeted neural arrays in selected repeated pairs. File-level uniqueness was not biological independence.</p></div>
+            <a class="finding-link" href="https://github.com/viniburilux/organoid-intelligence/blob/main/evidence/findings.md#finding-03--replication-exposed-a-provenance-problem" target="_blank" rel="noreferrer">Read the full finding</a>
+          </article>
+          <article class="finding no-04">
+            <div class="finding-tag"><span>Finding 04</span><span>Methodological pivot</span></div>
+            <div><h3>The experiment changed the question.</h3><p>When aligned condition labels were unavailable, the investigation moved from supervised decoding to label-free temporal prediction instead of manufacturing a variable the data did not contain.</p></div>
+            <a class="finding-link" href="https://github.com/viniburilux/organoid-intelligence/blob/main/evidence/findings.md#finding-04--the-experiment-changed-the-question" target="_blank" rel="noreferrer">Read the full finding</a>
+          </article>
+        </div>
+        <div class="callout">The most important result is not that one model won. It is that <strong>the evidence was allowed to change the question.</strong></div>
+      </div>
+    </section>
+
+    <section class="section ink-2" id="limits">
+      <div class="wrap split">
+        <div>
+          <div class="eyebrow">What we ruled out</div>
+          <h2>Good research leaves shortcuts behind.</h2>
+          <p class="kicker">The record is stronger because it keeps failed interpretations visible.</p>
+          <div class="actions"><a class="button" href="https://github.com/viniburilux/organoid-intelligence/blob/main/evidence/what-we-ruled-out.md" target="_blank" rel="noreferrer">Read what was ruled out ↗</a></div>
+        </div>
+        <div class="rule-list">
+          <div class="rule"><div class="rule-num">01</div><p><b>Aggregate summaries are not a reliable performance shortcut.</b>The tested summaries did not beat simple baselines.</p></div>
+          <div class="rule"><div class="rule-num">02</div><p><b>A missing label is not permission to invent one.</b>Subject identity, timestamps and filenames are not experimental conditions.</p></div>
+          <div class="rule"><div class="rule-num">03</div><p><b>File-level uniqueness is not biological independence.</b>Different digests can still contain equal neural payloads.</p></div>
+          <div class="rule"><div class="rule-num">04</div><p><b>Synthetic control is not organoid evidence.</b>Computational trajectories do not establish intelligence or consciousness.</p></div>
+          <div class="rule"><div class="rule-num">05</div><p><b>M2-E does not prove that more memory is better.</b>The policy-class confound remains explicit.</p></div>
+        </div>
+      </div>
+      <div class="wrap" style="margin-top: 82px">
+        <div class="eyebrow">What we can say now</div>
+        <div class="support-grid">
+          <div class="support"><div class="symbol">01 /</div><p>Controlled computational experiments can be run with explicit tasks, seeds, metrics and provenance.</p></div>
+          <div class="support"><div class="symbol">02 /</div><p>Simple temporal features can carry incremental short-horizon predictive information in bounded sessions.</p></div>
+          <div class="support"><div class="symbol">03 /</div><p>Replication can expose a provenance problem instead of confirming the intended interpretation.</p></div>
+          <div class="support"><div class="symbol">04 /</div><p>Contradictions and uncertainty can be preserved rather than smoothed away.</p></div>
+          <div class="support"><div class="symbol">05 /</div><p>A missing label can force a more defensible, label-free research question.</p></div>
+          <div class="support"><div class="symbol">06 /</div><p>A research-state model can preserve knowledge, questions, hypotheses and next moves.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section paper" id="record">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow" style="color:#e45d4d">The investigation</div><h2>A question that kept moving.</h2></div>
+          <p class="kicker">The sequence matters. Each stage changed what the next stage was allowed to ask.</p>
+        </div>
+        <div class="timeline">
+          <div class="time-item"><div class="time-step">Stage 01</div><div><h3>Field validation</h3><p>Public papers, tools, datasets and licenses were checked at the source. Claims were corrected before they became project assumptions.</p></div></div>
+          <div class="time-item"><div class="time-step">Stage 02</div><div><h3>Aggregate prediction</h3><p>Experiment-level performance prediction was tested on 32 experiments from 16 organoids. Simple baselines won.</p></div></div>
+          <div class="time-item"><div class="time-step">Stage 03</div><div><h3>Label audit</h3><p>The available neural objects did not carry a clean condition or performance label aligned to the windows.</p></div></div>
+          <div class="time-item"><div class="time-step">Stage 04</div><div><h3>Temporal branch</h3><p>The question moved to label-free next-window prediction, with explicit time blocks and no learned embeddings.</p></div></div>
+          <div class="time-item"><div class="time-step">Stage 05</div><div><h3>Stress and replication</h3><p>Burst/backbone features added a narrow predictive direction, survived most contiguous blocks and reproduced in a third tested session.</p></div></div>
+          <div class="time-item"><div class="time-step">Stage 06</div><div><h3>Provenance contradiction</h3><p>Equal neural payloads inside different files changed the interpretation from biological stability to source lineage and curation.</p></div></div>
+          <div class="time-item"><div class="time-step">Stage 07</div><div><h3>Computational Sandbox</h3><p>A separate synthetic laboratory tested closed-loop control, memory windows and perturbations while keeping its biological boundary explicit.</p></div></div>
+        </div>
+        <div class="callout" style="background: var(--paper-2); color: var(--ink); border-left: 4px solid var(--coral)">The operating principle: <strong style="color:#d45444">the data determines the question.</strong></div>
+      </div>
+    </section>
+
+    <section class="section ink-2" id="sandbox">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Public Sandbox edition</div><h2>Make the assumptions visible.</h2></div><p class="kicker">A synthetic control laboratory, published as a concept and a boundary — not as a biological substitute.</p></div>
+        <div class="sandbox-panel">
+          <div>
+            <h3>One loop, explicit limits.</h3>
+            <p class="kicker">The public edition describes the protocol shape behind M1, M2, M2-D and M2-E: action, response, observation, transition memory, objective, metrics and the next action.</p>
+            <div class="actions"><a class="button primary" href="https://github.com/viniburilux/organoid-intelligence/blob/main/public-sandbox/README.md" target="_blank" rel="noreferrer">Explore the public edition ↗</a></div>
+            <p class="sandbox-note">The private laboratory contains the operational machinery. This page contains the portable idea.</p>
+          </div>
+          <div class="code-block" aria-label="Public sandbox protocol example"><span class="code-comment"># public, non-operational example</span><br><span class="code-key">substrate</span>: <span class="code-value">synthetic-2d</span><br><span class="code-key">objective</span>: <span class="code-value">reach-target-after-perturbation</span><br><span class="code-key">policy</span>: <span class="code-value">current-state-only</span><br><span class="code-key">memory</span>: <span class="code-value">none</span><br><span class="code-key">metrics</span>:<br>&nbsp;&nbsp;- <span class="code-value">success_post</span><br>&nbsp;&nbsp;- <span class="code-value">recovery</span><br>&nbsp;&nbsp;- <span class="code-value">transfer</span><br><span class="code-key">status</span>: <span class="code-value">computational-demonstration</span><br><span class="code-key">biological_claim</span>: <span class="code-value">false</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="status-band">
+      <div class="wrap status-inner"><p><b>Public record.</b> Private machinery.<br>Evidence before interpretation.</p><a class="button" href="https://github.com/viniburilux/organoid-intelligence" target="_blank" rel="noreferrer">View the repository ↗</a></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>ORGANOID INTELLIGENCE / INVESTIGATED WITHOUT SHORTCUTS</div>
+      <div><a href="https://github.com/viniburilux/organoid-intelligence" target="_blank" rel="noreferrer">GitHub</a> &nbsp;·&nbsp; <a href="https://github.com/viniburilux/organoid-intelligence/blob/main/docs/evidence-policy.md" target="_blank" rel="noreferrer">Evidence policy</a> &nbsp;·&nbsp; <a href="https://github.com/viniburilux/organoid-intelligence/blob/main/docs/limitations.md" target="_blank" rel="noreferrer">Limitations</a></div>
+      <div>Open research record / 2026</div>
+    </div>
+  </footer>
+</body>
+</html>
