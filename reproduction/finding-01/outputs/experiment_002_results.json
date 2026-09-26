@@ -1,0 +1,98 @@
+{
+  "seed": 2026,
+  "n_splits": 5,
+  "n_permutations": 1000,
+  "n_all_experiments": 38,
+  "n_common_complete_experiments": 32,
+  "n_organoids": 16,
+  "models": [
+    {
+      "model": "mean_baseline",
+      "n_samples": 32,
+      "n_groups": 16,
+      "mae": 30.52619259891972,
+      "rmse": 55.93377586037144,
+      "r2": -0.09304851485333843,
+      "spearman": -0.3011372610236969
+    },
+    {
+      "model": "median_baseline",
+      "n_samples": 32,
+      "n_groups": 16,
+      "mae": 24.24411397081166,
+      "rmse": 55.87109847089794,
+      "r2": -0.09060022518155675,
+      "spearman": -0.2742032451308942
+    },
+    {
+      "model": "firing_rate",
+      "n_samples": 32,
+      "n_groups": 16,
+      "mae": 53.04958000925856,
+      "rmse": 83.01647788236357,
+      "r2": -1.4077964535874345,
+      "spearman": 0.35850439882697943
+    },
+    {
+      "model": "network",
+      "n_samples": 32,
+      "n_groups": 16,
+      "mae": 46.9330197121258,
+      "rmse": 70.04762941139407,
+      "r2": -0.714265352071976,
+      "spearman": -0.22653958944281521
+    }
+  ],
+  "permutations": [
+    {
+      "model": "mean_baseline",
+      "n_permutations": 1000,
+      "mae_permutation_p": 0.8391608391608392,
+      "mae_null_mean": 29.735098688837926,
+      "rmse_permutation_p": 0.7732267732267732,
+      "rmse_null_mean": 55.44128516387809,
+      "r2_permutation_p": 0.7732267732267732,
+      "r2_null_mean": -0.07407884345075791,
+      "spearman_permutation_p": 0.6663336663336663,
+      "spearman_null_mean": -0.24091897386603217
+    },
+    {
+      "model": "median_baseline",
+      "n_permutations": 1000,
+      "mae_permutation_p": 0.3306693306693307,
+      "mae_null_mean": 24.45992158170086,
+      "rmse_permutation_p": 0.5704295704295704,
+      "rmse_null_mean": 55.83517097632513,
+      "r2_permutation_p": 0.5704295704295704,
+      "r2_null_mean": -0.08920747354959123,
+      "spearman_permutation_p": 0.47952047952047955,
+      "spearman_null_mean": -0.2833857202737167
+    },
+    {
+      "model": "firing_rate",
+      "n_permutations": 1000,
+      "mae_permutation_p": 0.922077922077922,
+      "mae_null_mean": 40.63565978649945,
+      "rmse_permutation_p": 0.8811188811188811,
+      "rmse_null_mean": 68.28821171783024,
+      "r2_permutation_p": 0.8811188811188811,
+      "r2_null_mean": -0.6791232163573614,
+      "spearman_permutation_p": 0.017982017982017984,
+      "spearman_null_mean": -0.07012866568914956
+    },
+    {
+      "model": "network",
+      "n_permutations": 1000,
+      "mae_permutation_p": 0.6313686313686314,
+      "mae_null_mean": 45.048806445183075,
+      "rmse_permutation_p": 0.5234765234765235,
+      "rmse_null_mean": 76.7601927935336,
+      "r2_permutation_p": 0.5234765234765235,
+      "r2_null_mean": -1.2256702328368363,
+      "spearman_permutation_p": 0.8001998001998002,
+      "spearman_null_mean": -0.05216239002932551
+    }
+  ],
+  "sequence_spike_status": "unavailable in versioned derived tables; not forced",
+  "leakage_check": "GroupKFold by organoid; each organoid occurs in one fold only; preprocessing is fitted inside each training fold."
+}

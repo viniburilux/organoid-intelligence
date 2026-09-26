@@ -1,0 +1,22 @@
+# Core analysis dependencies validated or selected for the first MVP
+numpy>=2.0
+scipy>=1.10
+pandas>=2.0
+scikit-learn
+matplotlib
+networkx
+neo
+pynwb
+h5py
+requests
+
+# Optional tools; install only when needed
+# spikeinterface==0.105.0
+# dandi
+# elephant
+# brian2
+
+# CL SDK is intentionally not listed here because it requires Python >=3.12
+# and is distributed under CC BY-NC 4.0. Install separately when the
+# non-commercial license and environment are appropriate:
+# pip install cl-sdk
