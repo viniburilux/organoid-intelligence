@@ -1,0 +1,136 @@
+{
+  "investigation_id": "exp003_burst_propagation",
+  "date": "2026-09-29",
+  "phenomenon_studied": "Burst events in human cerebral organoid multi-electrode array recordings (Zenodo 18298694)",
+  "key_findings_about_phenomenon": [
+    "Bursts defined as events with ISI ≤ 2 ms and ≥7 spikes across the 8-channel array occur at a mean rate of 2.25 bursts/min across recordings, matching literature reports (~2.20 bursts/min).",
+    "These bursts represent multi-channel synchrony: they are not visible in single-channel burst analyses (per-channel burst rate ≈ 0).",
+    "Within a burst, the first-spike latencies across channels are small (mean lag ~1 ms) with standard deviations ~1.5–2.2 ms, indicating near-synchronous activation rather than clear propagation.",
+    "There is no consistent directional order: the probability any given channel is the earliest in a burst ranges from 0.07 to 0.33, with channel 3 showing the highest likelihood (0.33) but still far from deterministic.",
+    "Latency distributions between adjacent and non-adjacent channels are statistically indistinguishable (means ≈ -0.05 to -0.11 ms, std ~2.1–2.2 ms), supporting the hypothesis of near-zero-lag synchrony rather than wave-like propagation.",
+    "Burst rates vary substantially across recordings (0–18.2 bursts/min), indicating heterogeneity in organoid network states, possibly reflecting differences in maturity, density, or metabolic state.",
+    "The vast majority of spikes (~97%) occur outside these high-synchrony bursts, indicating that baseline activity is largely asynchronous or involves smaller sub-groups of channels."
+  ],
+  "key_findings_about_investigation_process": [
+    "The initial contradiction (~8 spikes/recording vs ~19k) was traced to a representation failure: HDF5 object references in MATLAB v7.3 files were not dereferenced, causing reference IDs to be read as spike times.",
+    "Correcting the ingestion pipeline (dereferencing object references) recovered biologically plausible spike counts and restored agreement with literature.",
+    "Subsequent analysis revealed additional failure modes: unit/population mismatch (per-channel vs per-recording metrics), burst definition mismatch (different ISI thresholds and min-spike parameters), and duplicate timestamp artifacts.",
+    "A systematic forensic approach—inspecting data types, validating against known literature ranges, and performing sensitivity analyses—allowed identification and correction of these issues.",
+    "The investigation machine's ability to automatically detect representation failures (dtype=object), run validation tests (spike count plausibility, firing rate ranges, burst rate >0, CV ISI >0.5), and apply corrections is critical for robust analysis of novel datasets."
+  ],
+  "key_findings_about_machine_operation": [
+    "The machine must maintain a clear separation between internal rigor (provenance, evidence, hypotheses, contradictions, validation) and external representation (narrative, communication).",
+    "Iterative cycles of hypothesis testing, falsification, and experiment design are essential; the machine should not halt at first contradiction but treat it as a signal to diagnose the ingestion/representation layer.",
+    "Failure modes should be cataloged and generalized into reusable patterns (e.g., HDF5 object reference not dereferenced, unit/population mismatch, burst definition mismatch, duplicate timestamps) to enable automatic detection in future datasets.",
+    "Validation checks should be layered: ingestion → representation → semantic validation → source/metadata cross‑check → sanity check → analysis. Each layer can be automated and triggered conditionally.",
+    "The machine benefits from maintaining a dynamic research state (key questions, contradictions, hypotheses, experiment registry) that evolves with each experiment and informs the next move.",
+    "Decomposition of complex tasks into subagent‑parallel workloads (e.g., separate agents for ISI distribution, Fano factor, burst detection, heterogeneity analysis) improves speed and depth without loss of rigor."
+  ],
+  "reusable_assets": [
+    {
+      "type": "failure_pattern",
+      "id": "FP-HDF5-OBJREF-001",
+      "description": "HDF5 object reference not dereferenced in MATLAB v7.3 files.",
+      "detection_rule": "If a dataset of interest has dtype==object and shape[0]==n_channels, suspect object references.",
+      "correction": "Dereference each element: data = f[ref] for ref in dataset[:,0].",
+      "validation": "After correction, spike counts should be in the hundreds to thousands per channel; firing rates within biologically plausible range; burst rate >0; CV ISI >0.5."
+    },
+    {
+      "type": "failure_pattern",
+      "id": "FP-UNIT-POPULATION-MISMATCH-001",
+      "description": "Confusion between per-channel and per-recording (summed) metrics leading to order-of-magnitude errors.",
+      "detection_rule": "If a metric is exactly N times expected (where N = number of channels/electrodes), inspect unit of analysis.",
+      "correction": "Explicitly define and maintain unit of analysis (per channel vs per population); label all results accordingly.",
+      "validation": "Per-channel metrics should fall within known biological ranges; the ratio of per-recording to per-channel metrics should equal the number of channels."
+    },
+    {
+      "type": "failure_pattern",
+      "id": "FP-BURST-DEF-MISMATCH-001",
+      "description": "Inconsistent burst definitions (ISI threshold, min spikes) leading to non‑comparable burst rates.",
+      "detection_rule": "High sensitivity of burst rate to small parameter changes; inability to reproduce literature values.",
+      "correction": "Explicitly define burst detection algorithm and parameters; document; apply consistently; when comparing with literature, either reproduce the exact definition or report under multiple common definitions.",
+      "validation": "Burst rate should be stable under small perturbations of chosen parameters; burst trains should have interpretable internal structure (e.g., characteristic intra‑burst spike frequency)."
+    },
+    {
+      "type": "failure_pattern",
+      "id": "FP-DUPE-TIMESTAMP-001",
+      "description": "Duplicate timestamps creating artifactual ISIs ≈0 ms.",
+      "detection_rule": "Excess of ISIs exactly 0.0 ms or very short multiples of the sampling interval.",
+      "correction": "Remove duplicate timestamps (keep one copy per set of identical timestamps) or apply a minimal ISI constraint (e.g., remove spikes with ISI < refractory period).",
+      "validation": "After correction, zero‑ISI count should be at baseline; ISI distribution should show smooth decay at short intervals consistent with refractory periods."
+    }
+  ],
+  "potential_software_capabilities": [
+    {
+      "name": "Automated Ingestion Validator",
+      "description": "A module that, upon loading a dataset, checks for common representation failures (object references, unit mismatches, burst definition sensitivity, duplicate timestamps) and either corrects them or flags them for user review.",
+      "inputs": ["Raw dataset (e.g., .mat, .h5, .nwb)", "metadata (number of channels, expected sampling rate)"],
+      "outputs": ["Cleaned data pipeline", "Validation report", "Suggested corrections"]
+    },
+    {
+      "name": "Neural Metric Sanity Checker",
+      "description": "Library of functions that validate neural metrics (firing rate, burst rate, CV ISI, synchrony, participation ratio) against biologically plausible ranges and internal consistency (e.g., per-channel vs per-recording ratios).",
+      "inputs": ["Computed metrics", "dataset characteristics (n_channels, duration)"],
+      "outputs": ["Pass/Fail flags", "Diagnostic messages"]
+    },
+    {
+      "name": "Burst Definition Sensitivity Explorer",
+      "description": "Tool that sweeps burst detection parameters (ISI threshold, min spikes) and visualizes resulting burst rates, spike fractions, and temporal structure to help users select appropriate definitions.",
+      "inputs": ["Spike times per channel", "parameter ranges"],
+      "outputs": ["Parameter‑response curves", "Recommended settings based on stability or literature matching"]
+    },
+    {
+      "name": "Research State Tracker",
+      "description": "Persistent JSON‑based structure that records key questions, contradictions, hypotheses, experiment registry, and evidence registry, enabling traceability and adaptive experiment selection.",
+      "inputs": ["Experiment outcomes", "new contradictions", "new hypotheses"],
+      "outputs": ["Updated research state", "next move recommendation"]
+    }
+  ],
+  "potential_service_or_product_ideas": [
+    {
+      "idea": "Data Quality Assurance for Neural Recordings",
+      "description": "A SaaS offering that ingests raw neural data (from MEA, Neuropixels, EEG, etc.), runs the automated ingestion validator and sanity checker, and returns a certified clean dataset plus a quality report. Useful for core facilities, CROs, and labs sharing data.",
+      "value": "Reduces time lost to data‑format errors, increases reproducibility."
+    },
+    {
+      "idea": "Experiment Design Advisor for Closed‑Loop Neural Stimulation",
+      "description": "A service that, given a dataset and a set of hypotheses, uses the research state tracker and failure pattern library to suggest the next highest‑value experiment (e.g., propagation analysis, stimulation response testing).",
+      "value": "Accelerates discovery loop, reduces wasted effort on low‑information experiments."
+    },
+    {
+      "idea": "Neural Burst Analysis Toolkit",
+      "description": "A portable Python/Matlab toolkit that implements the burst detection, propagation, and heterogeneity analyses demonstrated here, with GUI for parameter exploration and export of publication‑ready figures.",
+      "value": "Provides standardized burst analysis for the community."
+    }
+  ],
+  "demonstration_or_poc_ideas": [
+    {
+      "idea": "Closed‑Loop Burst‑Responsive Stimulation Demo",
+      "description": "Using the Cortical Cloud API (or a simulator), deliver a stimulation pulse when a burst is detected (based on the definition from EXP‑002) and measure the effect on subsequent burst probability or firing rate.",
+      "value": "Shows the investigation machine can move from passive observation to active hypothesis testing in real time."
+    },
+    {
+      "idea": "Failure Pattern Walkthrough",
+      "description": "An interactive notebook that loads a raw .mat file with the HDF5 object‑reference error, walks through the diagnostic steps, applies the correction, and shows the before/after metrics.",
+      "value": "Educational tool for teaching data ingestion best practices."
+    }
+  ],
+  "research_only_value": [
+    "Understanding the precise biophysical mechanisms underlying the observed near‑zero‑lag multi‑channel synchrony (e.g., ephaptic coupling, common input, intrinsic network oscillations).",
+    "Determining whether the burst heterogeneity across recordings reflects distinct developmental states or stochastic network configurations.",
+    "Exploring the functional role of bursts in information transmission or storage within organoid networks (e.g., do bursts trigger plasticity?).",
+    "Investigating how bursts change under pharmacological manipulation or genetic perturbation of organoids.",
+    "These questions require biological interventions (drugs, genetics, stimulation) and are beyond the scope of purely analytical work on existing datasets."
+  ],
+  "next_move_assessment": {
+    "chosen_next_move": "EXP-003: Burst propagation and directionality analysis (completed)",
+    "rationale": "The analysis of burst propagation (near‑zero‑lag synchrony) was the highest‑value immediate next step because it directly addressed the nature of the multi‑channel events identified in EXP‑002, required no new biological data, and could be completed with existing data and modest computational effort.",
+    "alternatives_considered": [
+      "Continue exploratory analysis of the same dataset (e.g., higher‑order statistics, information theory) – lower immediate value because the core contradiction about burst nature was unresolved.",
+      "Access real‑time data from Cortical Cloud or FinalSpark Neuroplatform – higher potential value but requires new biological data, ethical approvals, and experimental setup; not yet feasible without user coordination.",
+      "Integrate with other domains (e.g., apply failure‑pattern framework to non‑neural datasets) – valuable for generalization but secondary to solidifying the neuroscience use case first.",
+      "Transform capabilities into a POC or product – premature before the investigation machine’s core loop has been demonstrated end‑to‑end on a realistic biological question."
+    ],
+    "trade_off": "The chosen path maximized informational gain per unit effort while keeping the investigation fully autonomous. Alternatives either required higher effort (new biological data) or lower immediate insight (pure exploration). The next step after EXP-003 will be to decide whether to pursue closed‑loop stimulation experiments (requiring biological interaction) or to generalize the failure‑pattern framework to other domains, based on the outcomes of EXP-003."
+  }
+}
