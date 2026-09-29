@@ -1,0 +1,107 @@
+{
+  "timestamp": "2026-09-29T04:49:04.075773",
+  "experiment": "adaptive_feature_stimulation",
+  "parameters": {
+    "base_current_ua": 1.0,
+    "base_train_count": 5,
+    "reference_spike_count": 5,
+    "max_current_ua": 5.0,
+    "max_train_count": 10
+  },
+  "phase_counts": {
+    "baseline": 4,
+    "stimulation": 3,
+    "post": 3
+  },
+  "rates": {
+    "baseline": 0.4,
+    "stimulation": 0.3,
+    "post": 0.3
+  },
+  "delta_post_baseline": -0.10000000000000003,
+  "hypothesis_supported": true,
+  "falsification": null,
+  "burst_features_log": [
+    {
+      "tick": 916,
+      "phase": "baseline",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 576287
+    },
+    {
+      "tick": 1231,
+      "phase": "baseline",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 592053
+    },
+    {
+      "tick": 2987,
+      "phase": "baseline",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 679857
+    },
+    {
+      "tick": 3210,
+      "phase": "baseline",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 690991
+    },
+    {
+      "tick": 5048,
+      "phase": "stimulation",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 782893
+    },
+    {
+      "tick": 6532,
+      "phase": "stimulation",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 857127
+    },
+    {
+      "tick": 9703,
+      "phase": "stimulation",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 1015639
+    },
+    {
+      "tick": 10076,
+      "phase": "post",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 1034310
+    },
+    {
+      "tick": 10234,
+      "phase": "post",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 1042196
+    },
+    {
+      "tick": 10411,
+      "phase": "post",
+      "spike_count": 3,
+      "unique_channels": 3,
+      "synchrony": 1.0,
+      "timestamp": 1051041
+    }
+  ],
+  "recording": "adaptive_feature_results/2026-09-29_04-48-32.348_adaptive_feature_stim.h5"
+}

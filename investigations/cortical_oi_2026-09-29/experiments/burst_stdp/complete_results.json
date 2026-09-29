@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-09-29T04:46:17.855434",
+  "experiment": "burst_stdp_protocol",
+  "conditions": {
+    "control": {
+      "phase_counts": {
+        "baseline": 2,
+        "stimulation": 0,
+        "post": 1
+      },
+      "baseline_rate": 0.2,
+      "stim_rate": 0.0,
+      "post_rate": 0.1,
+      "recording": "burst_stdp_results/control/2026-09-29_04-44-42.521_burst_stdp_control.h5"
+    },
+    "ltp": {
+      "phase_counts": {
+        "baseline": 3,
+        "stimulation": 3,
+        "post": 1
+      },
+      "baseline_rate": 0.3,
+      "stim_rate": 0.3,
+      "post_rate": 0.1,
+      "recording": "burst_stdp_results/ltp/2026-09-29_04-45-14.251_burst_stdp_ltp.h5"
+    },
+    "ltd": {
+      "phase_counts": {
+        "baseline": 2,
+        "stimulation": 3,
+        "post": 2
+      },
+      "baseline_rate": 0.2,
+      "stim_rate": 0.3,
+      "post_rate": 0.2,
+      "recording": "burst_stdp_results/ltd/2026-09-29_04-45-45.964_burst_stdp_ltd.h5"
+    }
+  },
+  "analysis": {
+    "ltp_delta": -0.19999999999999998,
+    "control_delta": -0.1,
+    "ltd_delta": 0.0,
+    "hypotheses_supported": false,
+    "falsified": [
+      "H1: LTP did not increase burst rate relative to control",
+      "H2: LTD did not decrease burst rate relative to control",
+      "H3: LTP and LTD did not show opposite effects"
+    ]
+  }
+}

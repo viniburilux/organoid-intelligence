@@ -1,0 +1,82 @@
+[
+  {
+    "asset_type": "Hardware Platform",
+    "description": "Cortical Labs CL1: Biological computer with integrated high-density multi-electrode array (HD-MEA) hosting ~800,000 human cortical neurons derived from iPSCs, featuring 60 interactive electrodes for bidirectional neural interfacing, onboard life support maintaining viability for up to 6 months, and microsecond-latency closed-loop stimulation/recording capabilities.",
+    "evidence_level": "paper",
+    "key_details": "60-electrode MEA (8x8 grid with 4 reference corners), 25,000 frames/sec sampling rate, 0.195 µV/sample unit conversion, programmable bi-directional neural interface, touchscreen for live visualization, plug-and-play extensibility via USB/ports, current-based stimulation with pulse width duration in multiples of 20µs and current in µA",
+    "URL": "https://www.corticallabs.com/cl1",
+    "reuse_potential": "High - Enables reproducible closed-loop experiments with biological neural networks for neurocomputing, disease modeling, and drug screening applications"
+  },
+  {
+    "asset_type": "Cloud Platform",
+    "description": "Cortical Cloud: Remote access platform allowing deployment of code to CL1 systems from anywhere without local hardware, featuring zero-install browser-based interface, neuroplatform for managing external sensor integration, and networked architecture for distributed experimentation.",
+    "evidence_level": "documentation",
+    "key_details": "Browser-based Jupyter notebook support, Python SDK for remote code deployment, eliminates need for local lab infrastructure, enables scalable experimentation across multiple CL1 units, integrates with external sensors and actuators in real-time",
+    "URL": "https://corticallabs.com/cloud",
+    "reuse_potential": "High - Facilitates distributed research collaborations and accessibility to CL1 technology for global scientific community"
+  },
+  {
+    "asset_type": "API",
+    "description": "Cortical Labs Application Programming Interface (CL API): Python library providing real-time, sub-millisecond closed-loop interactions with Biological Neural Networks (BNNs) through contract-based design guaranteeing timing, ordering, synchronization, and failure semantics.",
+    "evidence_level": "paper",
+    "key_details": "Declarative Python interface for specifying stimulation/recording behavior without low-level hardware management, transactional admission for stimulation plans, deterministic ordering, explicit synchronization guarantees, microsecond latency, reference implementation on CL1 hardware with FPGA acceleration, compatible simulator for local development",
+    "URL": "https://arxiv.org/pdf/2602.11632",
+    "reuse_potential": "High - Provides standardized, reproducible interface for closed-loop neural experiments accessible to non-expert programmers"
+  },
+  {
+    "asset_type": "SDK",
+    "description": "Cortical Labs CL SDK Simulator: Local development tool providing 1:1 interface parity with on-device CL API, supporting random data generation and recording replay for application testing and debugging.",
+    "evidence_level": "documentation",
+    "key_details": "Wall-clock or accelerated timing modes, built-in WebSocket server for visualization, environment variable configuration (CL_SDK_REPLAY_PATH, CL_SDK_ACCELERATED_TIME), drop-in replacement for CL API enabling code developed locally to run on physical CL1 systems with minimal modification",
+    "URL": "https://github.com/Cortical-Labs/cl-sdk",
+    "reuse_potential": "High - Enables rapid iteration and testing of closed-loop neural applications without requiring physical hardware access"
+  },
+  {
+    "asset_type": "Paper",
+    "description": "DishBrain: In vitro neurons learn and exhibit sentience when embodied in a simulated game-world - Demonstrating goal-directed learning in biological neural networks through closed-loop interaction with simulated Pong environment.",
+    "evidence_level": "paper",
+    "key_details": "First demonstration of synthetic biological intelligence (SBI) showing apparent learning within 5 minutes of real-time gameplay, significant increase in rally lengths over time, species-dependent learning capabilities (human vs mouse cortical cells), closed-loop structured feedback essential for learning",
+    "URL": "https://www.cell.com/neuron/fulltext/S0896-6273(22)00806-6",
+    "reuse_potential": "Medium - Provides proof-of-concept for closed-loop learning paradigms but requires specialized DishBrain system setup"
+  },
+  {
+    "asset_type": "Paper",
+    "description": "CL API: Real-Time Closed-Loop Interactions with Biological Neural Networks - Technical whitepaper detailing the CL API contract-based design and reference implementation.",
+    "evidence_level": "paper",
+    "key_details": "Formal programming contract for real-time closed-loop interaction specifying timing, ordering, synchronization, and failure semantics, declarative programming model enabling precise specification without low-level control, empirical demonstration via CL1 reference implementation showing feasibility under real-time constraints",
+    "URL": "https://arxiv.org/pdf/2602.11632",
+    "reuse_potential": "High - Provides foundational framework for building reproducible closed-loop neural interaction systems"
+  },
+  {
+    "asset_type": "Dataset",
+    "description": "CL1 Neural Activity Recordings: HDF5-format datasets containing raw electrode samples, detected spikes, stimulation events, and experiment metadata generated by CL1 systems during closed-loop experiments.",
+    "evidence_level": "documentation",
+    "key_details": "Structured HDF5 format with /samples (EArray of int16, shape TxC), /spikes (Table with spike metadata), /stims (Table with stimulus timestamps/channels), global attributes including sampling frequency (25,000 Hz), channel count (64), timestamps, and experiment-specific data streams",
+    "URL": "https://docs.corticallabs.com/#loading-recordings",
+    "reuse_potential": "High - Enables post-hoc analysis, replication studies, and development of closed-loop algorithms using real neural data"
+  },
+  {
+    "asset_type": "Notebook",
+    "description": "CL-01 Detecting and Reacting to Spikes.ipynb: Introductory tutorial demonstrating basic closed-loop stimulation in response to detected action potentials using the CL API Loop API.",
+    "evidence_level": "documentation",
+    "key_details": "Example code spiking detection and stimulation loop (1000 ticks/sec for 5 seconds), stimulation of electrodes where spikes are detected, demonstration of tick object providing access to spike channel, timestamp, and sample data, foundation for building closed-loop neural interfaces",
+    "URL": "https://github.com/Cortical-Labs/cl-api-doc/blob/main/CL-01.%20Detecting%20and%20Reacting%20to%20Spikes.ipynb",
+    "reuse_potential": "High - Serves as template for basic closed-loop neural stimulation applications"
+  },
+  {
+    "asset_type": "Notebook",
+    "description": "CL-05 Reading Raw Data.ipynb: Tutorial demonstrating how to access and interpret raw neural data samples from CL1 recordings including timestamp handling and voltage conversion.",
+    "evidence_level": "documentation",
+    "key_details": "Explanation of samples (16-bit signed measurements), frames (64-electrode samples at 25k fps), timestamp system, raw-to-µV conversion (×0.195), examples of reading live data, historical data, and future timestamps, foundation for electrophysiological data analysis",
+    "URL": "https://github.com/Cortical-Labs/cl-api-doc/blob/main/CL-05.%20Reading%20Raw%20Data.ipynb",
+    "reuse_potential": "High - Essential for processing and analyzing raw neural electrophysiological data"
+  },
+  {
+    "asset_type": "Notebook",
+    "description": "CL-04 Real-Time Visualisation.ipynb: Tutorial showing how to create real-time data stream visualizations using Jupyter widgets and the CL API visualization interface.",
+    "evidence_level": "documentation",
+    "key_details": "Three required functions (reset, process, draw) for Jupyter data stream widgets, example moving ball simulation publishing position data stream, integration of HTML canvas and JavaScript with CL API data streams, enables real-time monitoring of experiment variables",
+    "URL": "https://github.com/Cortical-Labs/cl-api-doc/blob/main/CL-04.%20Real-Time%20Visualisation.ipynb",
+    "reuse_potential": "High - Provides framework for real-time monitoring and visualization of closed-loop neural experiment data"
+  }
+]

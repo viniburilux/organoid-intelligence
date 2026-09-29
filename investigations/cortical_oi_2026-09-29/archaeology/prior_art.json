@@ -1,0 +1,92 @@
+[
+  {
+    "paper": "Adaptive enhancement of learning protocol in hippocampal cultured networks grown on multielectrode arrays",
+    "year": 2013,
+    "method": "Closed-loop stimulation with adaptive activity-dependent reinforcement condition using response-to-stimulus ratio (R/S) threshold",
+    "key_metrics": "Learning effect preserved after 4-6 hours; enhanced number of highly respondent electrodes (>50%); successful learning in ~50% of trials",
+    "limitation": "Focused on hippocampal cultures only; required specific threshold estimation parameter (R/SThr% = 15%)",
+    "gap": "Limited to single electrode training; no spatial patterning across electrode arrays",
+    "URL": "https://www.frontiersin.org/journals/neural-circuits/articles/10.3389/fncir.2013.00087/full"
+  },
+  {
+    "paper": "Learning to control the brain through adaptive closed-loop patterned stimulation",
+    "year": 2021,
+    "method": "Model-free adaptive closed-loop stimulation (ACLS) system combining multi-electrode recordings with multi-site stimulation",
+    "key_metrics": "Learned specific neural activity patterns in ~15 minutes; 85.42% success rate in vivo; robust to noise and drift",
+    "limitation": "Tested primarily in mouse visual cortex; limited to 5-15 multiunit neurons",
+    "gap": "Lack of standardized encoding strategies for complex sensory-motor tasks",
+    "URL": "https://iopscience.iop.org/article/10.1088/1741-2552/abb860/meta"
+  },
+  {
+    "paper": "Evaluating Encoding Strategies for Closed-Loop Classification in Biological Neural Networks",
+    "year": 2024,
+    "method": "Compared rate-based, phase-based, burst-based, and time-to-first-spike temporal encodings using Cortical Labs CL-1 platform",
+    "key_metrics": "Burst-based temporal encoding achieved up to 95.6% accuracy in binary classification; optimized configuration used 16 encoding electrodes and 4+4 feedback electrodes",
+    "limitation": "Performance dropped to 50.6% for 4-class tasks; scalability limitations identified",
+    "gap": "Need for joint optimization of temporal and spatial encoding strategies for complex tasks",
+    "URL": "https://exa.ai/library/publication/5y33nklkrng"
+  },
+  {
+    "paper": "Closed-Loop, Open-Source Electrophysiology",
+    "year": 2010,
+    "method": "Open-source NeuroRighter system for multi-electrode recording and simultaneous patterned microstimulation",
+    "key_metrics": "Capable of suppressing epileptiform activity; electrically training cultures on navigation tasks; minimal stimulation artifact",
+    "limitation": "Requires significant technical expertise; primarily demonstrated in rodent models",
+    "gap": "Limited accessibility for broad neuroscience community due to custom hardware/software requirements",
+    "URL": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2010.00031/full"
+  },
+  {
+    "paper": "Online supervised learning of temporal patterns in biological neural networks under feedback control",
+    "year": 2024,
+    "method": "Real-time closed-loop BNN system integrating cultured cortical neurons with microfluidic devices and HD-MEAs for FORCE learning",
+    "key_metrics": "System learned to generate periodic and chaotic temporal signals; sustained oscillations at distinct frequencies (4-30s)",
+    "limitation": "Complex setup requiring microfluidic integration; limited demonstration of complex pattern generation",
+    "gap": "Need for simplified closed-loop interfaces for diverse temporal pattern generation tasks",
+    "URL": "https://pubmed.ncbi.nlm.nih.gov/41818149/"
+  },
+  {
+    "paper": "Regulation of Synaptic Plasticity and Adaptive Convergence Under Rhythmic Stimulation of an In Vitro Hippocampal Neuronal Network",
+    "year": 2020,
+    "method": "Rhythmic electrical stimulation at 7.8 Hz (Schumann Resonance) and 40 Hz (gamma frequency) with varying pulse repetitions",
+    "key_metrics": "Demonstrated frequency-specific adaptive regulatory properties; quantified dynamic evolution of network plasticity",
+    "limitation": "Focused on hippocampal networks; limited exploration of learning rules beyond plasticity modulation",
+    "gap": "Lack of closed-loop adaptive stimulation protocols for organizing network dynamics toward computational goals",
+    "URL": "https://exa.ai/library/publication/61vwylp9qnh"
+  },
+  {
+    "paper": "Goal-directed learning in cortical organoids",
+    "year": 2026,
+    "method": "Closed-loop electrophysiology framework embedding mouse cortical organoids into pole-balancing task (cartpole) with adaptive training signals",
+    "key_metrics": "Adaptive training with reinforcement learning improved performance from 10s to >60s balanced control; proficiency >45% with continuous adaptive training",
+    "limitation": "Improvements did not persist after 45-min rest period; required intact glutamatergic transmission",
+    "gap": "Need for mechanisms to consolidate short-term plasticity into longer-term memory traces",
+    "URL": "https://www.cell.com/cell-reports/fulltext/S2211-1247(26)00062-8"
+  },
+  {
+    "paper": "Long-Term Potentiation and Closed-Loop Learning in Paired Brain Organoids for CNS Drug Discovery",
+    "year": 2025,
+    "method": "Embedded electrode array (EEA) platform supporting electrophysiological integration of paired CNS-3D human brain organoids with closed-loop maze-game paradigm",
+    "key_metrics": "Demonstrated robust, pharmacologically tunable STP and LTP; closed-loop learning elicited adaptive behavioral responses dependent on exogenous BDNF",
+    "limitation": "Relies on pharmacological modulation for LTP; complexity of paired organoid system may limit throughput",
+    "gap": "Need for fully synthetic closed-loop learning systems without external pharmacological dependencies",
+    "URL": "https://www.biorxiv.org/content/10.1101/2025.07.03.663054v1"
+  },
+  {
+    "paper": "In vitro neurons learn and exhibit sentience when embodied in a simulated game-world (DishBrain)",
+    "year": 2022,
+    "method": "DishBrain system integrating in vitro neural networks with in silico computing via high-density MEA for real-time closed-loop interaction in simulated Pong environment",
+    "key_metrics": "Apparent learning within 5 minutes of real-time gameplay; significantly increased rally lengths over time; species-dependent learning capabilities",
+    "limitation": "Complex closed-loop environment requiring specialized hardware/software integration; limited to simple game-worlds",
+    "gap": "Need for standardized closed-loop interfaces to enable reproducible complex task embodiment across labs",
+    "URL": "https://www.cell.com/neuron/fulltext/S0896-6273(22)00806-6"
+  },
+  {
+    "paper": "Biological Neurons Compete with Deep Reinforcement Learning in Sample Efficiency in a Simulated Gameworld",
+    "year": 2024,
+    "method": "Compared learning efficiency of in vitro biological neural networks (DishBrain) to state-of-the-art deep RL algorithms (DQN, A2C, PPO) in simplified Pong simulation",
+    "key_metrics": "Biological cultures outperformed deep RL algorithms across game performance characteristics with limited samples; higher sample efficiency demonstrated",
+    "limitation": "Comparison limited to simplified Pong environment; biological system requires specialized maintenance",
+    "gap": "Need to understand mechanisms behind biological sample efficiency for hybrid bio-silicon learning systems",
+    "URL": "https://arxiv.org/html/2405.16946v1"
+  }
+]

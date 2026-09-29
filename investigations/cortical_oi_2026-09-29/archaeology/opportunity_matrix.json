@@ -1,0 +1,62 @@
+[
+  {
+    "Pergunta": "Can Bayesian optimization find stimulation parameters that reliably reduce burst rate in cortical networks?",
+    "Prior Art": "Bayesian optimization used in experimental design (see adaptive_exp.json); closed-loop stimulation studied in prior art (e.g., adaptive enhancement of learning protocol 2013, model-free ACLS 2021).",
+    "Ferramentas existentes": "Software: Gaussian process libraries (scikit-learn, GPyTorch); our infrastructure already does closed-loop stimulation and burst detection.",
+    "Dados necess\u00e1rios": "Burst rate as a function of stimulation parameters (amplitude, pulse count, pulse width, interval). Need to collect data from multiple stimulation conditions.",
+    "Experimento poss\u00edvel": "Run a closed-loop experiment where the stimulation parameters are selected by a Bayesian optimizer aiming to minimize burst rate over successive trials.",
+    "Hip\u00f3tese": "Bayesian optimization will find stimulation parameters that reduce burst rate below baseline within N trials.",
+    "M\u00e9trica": "Burst rate (bursts per second) and number of trials to reach significant reduction.",
+    "Falsifica\u00e7\u00e3o": "If burst rate does not decrease significantly after a reasonable number of trials (e.g., 20) compared to baseline, the hypothesis is falsified.",
+    "Potencial cient\u00edfico": "Alto - demonstrates autonomous parameter search in neural closed-loop systems.",
+    "Potencial tecnol\u00f3gico": "M\u00e9dio - could lead to adaptive stimulation protocols for therapeutic devices."
+  },
+  {
+    "Pergunta": "Does burst-triggered stimulation with precise spike-timing induce spike-timing-dependent plasticity-like changes in burst probability?",
+    "Prior Art": "STDP is well-established (see plasticity_protocols.json); closed-loop stimulation shown to modulate networks (prior art).",
+    "Ferramentas existentes": "Our infrastructure can detect bursts and deliver stimulation with controlled timing (we have StimDesign and precise timing via the loop).",
+    "Dados necess\u00e1rios": "Pre- and post-stimulation burst statistics, requiring baseline recording, stimulation recording, and post-stimulation recording.",
+    "Experimento poss\u00edvel": "Record baseline burst rate, then run a closed-loop experiment where stimulation is delivered with a fixed delay relative to detected bursts (e.g., +10ms for LTP-like, -10ms for LTD-like), then measure post-stimulation burst rate changes.",
+    "Hip\u00f3tese": "Post-burst stimulation (+10ms) will increase burst rate (LTP-like), while pre-burst stimulation (-10ms) will decrease burst rate (LTD-like).",
+    "M\u00e9trica": "Change in burst rate (post - pre) for each stimulation timing condition.",
+    "Falsifica\u00e7\u00e3o": "If the burst rate changes do not follow the expected timing-dependent pattern (i.e., no significant difference between +10ms and -10ms conditions), the hypothesis is falsified.",
+    "Potencial cient\u00edfico": "Alto - would demonstrate plasticity-like changes in cortical networks under closed-loop stimulation.",
+    "Potencial tecnol\u00f3gico": "Alto - could inform therapeutic stimulation protocols for neural reorganization."
+  },
+  {
+    "Pergunta": "Can LFADS-predicted neural states improve burst prediction accuracy over simple interval-based models?",
+    "Prior Art": "LFADS is a state-of-the-art method for predicting neural dynamics (see neural_prediction.json); burst prediction is a key goal in neuroscience (see prior art on burst-based encoding).",
+    "Ferramentas existentes": "We can record population spike data (we already do); we would need to implement or use an LFADS library (software inventory shows we could reuse or build).",
+    "Dados necess\u00e1rios": "High-resolution spike trains from multiple electrodes to train LFADS model, then test prediction of upcoming bursts.",
+    "Experimento poss\u00edvel": "Train an LFADS model on recorded spike data (excluding bursts to avoid circularity), then use the latent state to predict burst probability in held-out data, compare to baseline interval-based predictor.",
+    "Hip\u00f3tese": "LFADS-predicted neural state will yield higher burst prediction accuracy (lower contradiction rate) than a simple ISI-based predictor.",
+    "M\u00e9trica": "Contradiction rate (failed predictions) using LFADS vs. baseline predictor.",
+    "Falsifica\u00e7\u00e3o": "If the contradiction rate using LFADS is not significantly lower than the baseline predictor, the hypothesis is falsified.",
+    "Potencial cient\u00edfico": "Alto - improves understanding of neural precursors to bursts.",
+    "Potencial tecnol\u00f3gico": "M\u00e9dio - could lead to better closed-loop neuroprosthetics."
+  },
+  {
+    "Pergunta": "Does adaptive stimulation based on burst features (e.g., spike count, synchrony) lead to lasting changes in network burst dynamics?",
+    "Prior Art": "Adaptive stimulation studied (see prior art); plasticity protocols include burst modulation concepts (see plasticity_protocols.json).",
+    "Ferramentas existentes": "We can extract burst features (spike count, synchrony) from our detected bursts and adjust stimulation parameters accordingly.",
+    "Dados necess\u00e1rios": "Burst features and stimulation parameters over time, plus post-stimulation baseline to assess lasting changes.",
+    "Experimento poss\u00edvel": "Run a closed-loop experiment where stimulation amplitude or pulse count is scaled by a feature of the detected burst (e.g., higher spike count -> stronger stimulation), then measure burst rate during and after the experiment to see if changes persist.",
+    "Hip\u00f3tese": "Adaptive stimulation based on burst features will produce lasting changes in burst rate after stimulation ends, indicating network plasticity.",
+    "M\u00e9trica": "Burst rate during stimulation and in a post-stimulation baseline period, compared to pre-stimulation baseline.",
+    "Falsifica\u00e7\u00e3o": "If burst rate returns to pre-stimulation levels immediately after stimulation ends, the hypothesis is falsified (no lasting change).",
+    "Potencial cient\u00edfico": "Alto - demonstrates closed-loop induction of network plasticity.",
+    "Potencial tecnol\u00f3gico": "Alto - could lead to adaptive therapeutic devices that promote long-term neural reorganization."
+  },
+  {
+    "Pergunta": "Does our closed-loop OI infrastructure work with real cortical organoid data from Cortical Cloud?",
+    "Prior Art": "We have demonstrated integration with the simulator (see our prior experiments); Cortical Cloud provides real data (see cortical_assets.json).",
+    "Ferramentas existentes": "Our infrastructure (CorticalOIController, etc.) is designed to work with the CL API; we can use h5py to read data and simulate the API.",
+    "Dados necess\u00e1rios": "A real Cortical Cloud recording (HDF5 format) to replay via CL_SDK_REPLAY_PATH.",
+    "Experimento poss\u00edvel": "Set CL_SDK_REPLAY_PATH to a real recording and run our standard closed-loop integration experiment, measuring burst rate, contradiction rate, etc.",
+    "Hip\u00f3tese": "Our infrastructure will function correctly with real data, producing meaningful burst detection, contradiction logging, and closed-loop stimulation.",
+    "M\u00e9trica": "Successful execution of the experiment (no crashes), production of expected outputs (HDF5 with data streams, logs).",
+    "Falsifica\u00e7\u00e3o": "If the experiment fails to run or produces corrupt data, the hypothesis is falsified (our infrastructure is not compatible with real data without modification).",
+    "Potencial cient\u00edfico": "Alto - validates infrastructure for real biological data.",
+    "Potencial tecnol\u00f3gico": "Alto - enables real scientific discovery with Cortical Cloud."
+  }
+]
