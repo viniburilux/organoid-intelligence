@@ -1,0 +1,177 @@
+{
+  "metadata": {
+    "created": "2026-09-29",
+    "source": "Investigation Machine phases mapped to Cortical Cloud capabilities"
+  },
+  "investigation_machine_phases": {
+    "phase_1_characterization": {
+      "description": "Burst characterization, stimulation response, state transitions",
+      "classification": "RUN_NOW_PUBLIC",
+      "requirements": "HDF5/NWB recording with spikes",
+      "changes_for_cloud": "None - same pipeline works",
+      "latency_requirement": "None (offline analysis)",
+      "real_time_stimulation": false
+    },
+    "phase_2_hypothesis_testing": {
+      "description": "Test specific hypotheses with falsification criteria",
+      "classification": "RUN_NOW_PUBLIC",
+      "requirements": "Characterized recording + hypothesis registry",
+      "changes_for_cloud": "None - same statistical tests",
+      "latency_requirement": "None (offline analysis)",
+      "real_time_stimulation": false
+    },
+    "phase_3_discovery": {
+      "description": "Anomaly detection, cross-channel correlation, network bursts, temporal clustering",
+      "classification": "RUN_NOW_PUBLIC",
+      "requirements": "Multi-channel recording",
+      "changes_for_cloud": "May need more channels (CL1 has 59-64)",
+      "latency_requirement": "None (offline analysis)",
+      "real_time_stimulation": false
+    },
+    "phase_4_experiment_design": {
+      "description": "Design next experiment based on ResearchState",
+      "classification": "RUN_NOW_PUBLIC",
+      "requirements": "ResearchState + available protocols",
+      "changes_for_cloud": "Must map to CL1 stimulation API constraints",
+      "latency_requirement": "Design phase only",
+      "real_time_stimulation": false
+    },
+    "phase_5_cloud_execution": {
+      "description": "Execute designed experiment on live CL1 via Cortical Cloud",
+      "classification": "REQUIRES_LIVE_CL1",
+      "requirements": "Cortical Cloud access, API key, provisioned node",
+      "changes_for_cloud": "Full integration with CL SDK live mode",
+      "latency_requirement": "<1ms for stimulation feedback loop",
+      "real_time_stimulation": true
+    }
+  },
+  "experiment_classifications": {
+    "ACLS_on_simulator": {
+      "classification": "RUN_NOW_PUBLIC",
+      "can_run_on_replay": true,
+      "requires_live_stimulation": false,
+      "requires_real_time": false,
+      "notes": "Uses CL Simulator Poisson process; validates control logic only"
+    },
+    "Cartpole_on_simulator": {
+      "classification": "RUN_NOW_PUBLIC",
+      "can_run_on_replay": true,
+      "requires_live_stimulation": false,
+      "requires_real_time": false,
+      "notes": "Simulator doesn't have plasticity so learning won't persist"
+    },
+    "Burst_STDP": {
+      "classification": "REQUIRES_LIVE_CL1",
+      "can_run_on_replay": false,
+      "requires_live_stimulation": true,
+      "requires_real_time": true,
+      "latency_budget_ms": 10,
+      "notes": "Requires biological plasticity; simulator has none"
+    },
+    "Canonical_STDP": {
+      "classification": "REQUIRES_LIVE_CL1",
+      "can_run_on_replay": false,
+      "requires_live_stimulation": true,
+      "requires_real_time": true,
+      "latency_budget_ms": 1,
+      "notes": "Requires <1ms latency for precise spike timing"
+    },
+    "Spaced_Training": {
+      "classification": "REQUIRES_LIVE_CL1",
+      "can_run_on_replay": false,
+      "requires_live_stimulation": true,
+      "requires_real_time": false,
+      "notes": "Requires multi-session organoid access on Cloud"
+    },
+    "LFADS_Burst_Prediction": {
+      "classification": "RUN_NOW_PUBLIC",
+      "can_run_on_replay": true,
+      "requires_live_stimulation": false,
+      "requires_real_time": false,
+      "notes": "Offline analysis on public Zenodo organoid data"
+    },
+    "Contradiction_Driven_vs_Random": {
+      "classification": "RUN_ON_REPLAY",
+      "can_run_on_replay": true,
+      "requires_live_stimulation": false,
+      "requires_real_time": false,
+      "notes": "Uses existing simulator recordings"
+    },
+    "Network_Burst_Analysis": {
+      "classification": "RUN_NOW_PUBLIC",
+      "can_run_on_replay": true,
+      "requires_live_stimulation": false,
+      "requires_real_time": false,
+      "notes": "Offline analysis on public organoid data"
+    },
+    "Artifact_Rejection_Benchmark": {
+      "classification": "RUN_ON_REPLAY",
+      "can_run_on_replay": true,
+      "requires_live_stimulation": true,
+      "requires_real_time": false,
+      "notes": "Uses DANDI 001611 which has stimulation events"
+    },
+    "Session_Drift": {
+      "classification": "RUN_ON_REPLAY",
+      "can_run_on_replay": true,
+      "requires_live_stimulation": false,
+      "requires_real_time": false,
+      "notes": "Uses DANDI 001611 multi-session data"
+    }
+  },
+  "cloud_experiment_queue": [
+    {
+      "priority": 1,
+      "experiment": "ACLS_on_simulator",
+      "phase": "validation"
+    },
+    {
+      "priority": 2,
+      "experiment": "Cartpole_on_simulator",
+      "phase": "validation"
+    },
+    {
+      "priority": 3,
+      "experiment": "LFADS_Burst_Prediction",
+      "phase": "discovery"
+    },
+    {
+      "priority": 4,
+      "experiment": "Network_Burst_Analysis",
+      "phase": "discovery"
+    },
+    {
+      "priority": 5,
+      "experiment": "Contradiction_Driven_vs_Random",
+      "phase": "validation"
+    },
+    {
+      "priority": 6,
+      "experiment": "Artifact_Rejection_Benchmark",
+      "phase": "methods"
+    },
+    {
+      "priority": 7,
+      "experiment": "Session_Drift",
+      "phase": "methods"
+    },
+    {
+      "priority": 8,
+      "experiment": "Burst_STDP",
+      "phase": "cloud_execution",
+      "requires": "Cortical Cloud access"
+    },
+    {
+      "priority": 9,
+      "experiment": "Canonical_STDP",
+      "phase": "cloud_execution",
+      "requires": "Cortical Cloud access + <1ms latency"
+    },
+    {
+      "priority": 10,
+      "experiment": "Spaced_Training",
+      "phase": "cloud_execution",
+      "requires": "Cortical Cloud multi-session access"
+    }
+  ]
+}

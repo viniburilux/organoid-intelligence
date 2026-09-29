@@ -1,0 +1,89 @@
+{
+  "metadata": {
+    "created": "2026-09-29",
+    "selected_from": "experiment_registry.json",
+    "selection_criteria": "Highest priority RUN_NOW_PUBLIC experiment"
+  },
+  "experiment": {
+    "id": "EXP-001",
+    "name": "ACLS on CL Simulator - Adaptive Closed-Loop Stimulation for Burst Suppression",
+    "hypothesis": "HYP-000: Can ACLS protocol reduce burst rate in CL Simulator?",
+    "classification": "RUN_NOW_PUBLIC",
+    "priority": 1
+  },
+  "protocol": {
+    "name": "ACLS (Adaptive Closed-Loop Stimulation)",
+    "description": "Adaptive stimulation that adjusts parameters based on real-time burst detection to suppress pathological bursting",
+    "stimulation": {
+      "channels": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "current_ua": 20,
+      "pulse_width_us": 200,
+      "train_count": 5,
+      "inter_pulse_interval_us": 5000,
+      "adaptation": {
+        "enabled": true,
+        "burst_threshold_hz": 5.0,
+        "adaptation_interval_s": 10,
+        "max_current_ua": 50,
+        "min_current_ua": 5
+      }
+    },
+    "phases": [
+      {
+        "name": "baseline",
+        "duration_s": 60,
+        "stimulation": false
+      },
+      {
+        "name": "adaptive_stim",
+        "duration_s": 300,
+        "stimulation": true
+      },
+      {
+        "name": "post_stim",
+        "duration_s": 60,
+        "stimulation": false
+      }
+    ],
+    "total_duration_s": 420
+  },
+  "analysis_pipeline": {
+    "ingestion": "cortical_cloud_bridge (CL Simulator mode)",
+    "burst_detection": "BurstAnalyzer (min_spikes=3, max_isi_ms=15)",
+    "state_tracking": "Investigation Machine Phase 1-3",
+    "hypothesis_testing": "Investigation Machine Phase 2",
+    "outputs": [
+      "burst_rate_timecourse",
+      "stimulation_parameters_log",
+      "burst_prediction_accuracy",
+      "contradiction_log",
+      "research_state_evolution"
+    ]
+  },
+  "success_criteria": {
+    "min_burst_rate_reduction": "20%",
+    "min_stimulation_delivery": "95%",
+    "max_artifact_contamination": "5% spike loss in 2ms post-stim",
+    "contradiction_detection": "At least 1 contradiction recorded if hypothesis falsified"
+  },
+  "falsification_criterion": "Burst rate reduction <5% after 5 minutes of adaptive stimulation",
+  "resources": {
+    "compute": "CL Simulator (Poisson process)",
+    "storage": "~100 MB HDF5 recording",
+    "time_estimate": "10 minutes wall-clock (accelerated simulator)"
+  },
+  "expected_outcomes": {
+    "if_supported": "ACLS control logic validated; proceed to Cartpole experiment (EXP-002)",
+    "if_falsified": "ACLS parameters need tuning; test alternative adaptation rules",
+    "if_inconclusive": "Extend duration; check simulator burst statistics"
+  }
+}

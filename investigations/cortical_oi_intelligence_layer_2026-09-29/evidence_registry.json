@@ -1,0 +1,584 @@
+{
+  "metadata": {
+    "created": "2026-09-29",
+    "total_relations": 64
+  },
+  "evidence": [
+    {
+      "id": "rel_0",
+      "from": "ent_0",
+      "to": "ent_1",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Closed-loop stimulation with adaptive activity-dependent reinforcement condition using response-to-stimulus ratio (R/S) threshold",
+      "source": "prior_art.json",
+      "source_entry": 0
+    },
+    {
+      "id": "rel_1",
+      "from": "ent_0",
+      "to": "ent_2",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Limited to single electrode training; no spatial patterning across electrode arrays",
+      "source": "prior_art.json",
+      "source_entry": 0
+    },
+    {
+      "id": "rel_2",
+      "from": "ent_3",
+      "to": "ent_4",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Model-free adaptive closed-loop stimulation (ACLS) system combining multi-electrode recordings with multi-site stimulation",
+      "source": "prior_art.json",
+      "source_entry": 1
+    },
+    {
+      "id": "rel_3",
+      "from": "ent_3",
+      "to": "ent_5",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Lack of standardized encoding strategies for complex sensory-motor tasks",
+      "source": "prior_art.json",
+      "source_entry": 1
+    },
+    {
+      "id": "rel_4",
+      "from": "ent_6",
+      "to": "ent_7",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Compared rate-based, phase-based, burst-based, and time-to-first-spike temporal encodings using Cortical Labs CL-1 platform",
+      "source": "prior_art.json",
+      "source_entry": 2
+    },
+    {
+      "id": "rel_5",
+      "from": "ent_6",
+      "to": "ent_8",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Need for joint optimization of temporal and spatial encoding strategies for complex tasks",
+      "source": "prior_art.json",
+      "source_entry": 2
+    },
+    {
+      "id": "rel_6",
+      "from": "ent_9",
+      "to": "ent_10",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Open-source NeuroRighter system for multi-electrode recording and simultaneous patterned microstimulation",
+      "source": "prior_art.json",
+      "source_entry": 3
+    },
+    {
+      "id": "rel_7",
+      "from": "ent_9",
+      "to": "ent_11",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Limited accessibility for broad neuroscience community due to custom hardware/software requirements",
+      "source": "prior_art.json",
+      "source_entry": 3
+    },
+    {
+      "id": "rel_8",
+      "from": "ent_12",
+      "to": "ent_13",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Real-time closed-loop BNN system integrating cultured cortical neurons with microfluidic devices and HD-MEAs for FORCE learning",
+      "source": "prior_art.json",
+      "source_entry": 4
+    },
+    {
+      "id": "rel_9",
+      "from": "ent_12",
+      "to": "ent_14",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Need for simplified closed-loop interfaces for diverse temporal pattern generation tasks",
+      "source": "prior_art.json",
+      "source_entry": 4
+    },
+    {
+      "id": "rel_10",
+      "from": "ent_15",
+      "to": "ent_16",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Rhythmic electrical stimulation at 7.8 Hz (Schumann Resonance) and 40 Hz (gamma frequency) with varying pulse repetitions",
+      "source": "prior_art.json",
+      "source_entry": 5
+    },
+    {
+      "id": "rel_11",
+      "from": "ent_15",
+      "to": "ent_17",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Lack of closed-loop adaptive stimulation protocols for organizing network dynamics toward computational goals",
+      "source": "prior_art.json",
+      "source_entry": 5
+    },
+    {
+      "id": "rel_12",
+      "from": "ent_18",
+      "to": "ent_19",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Closed-loop electrophysiology framework embedding mouse cortical organoids into pole-balancing task (cartpole) with adaptive training signals",
+      "source": "prior_art.json",
+      "source_entry": 6
+    },
+    {
+      "id": "rel_13",
+      "from": "ent_18",
+      "to": "ent_20",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Need for mechanisms to consolidate short-term plasticity into longer-term memory traces",
+      "source": "prior_art.json",
+      "source_entry": 6
+    },
+    {
+      "id": "rel_14",
+      "from": "ent_21",
+      "to": "ent_22",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Embedded electrode array (EEA) platform supporting electrophysiological integration of paired CNS-3D human brain organoids with closed-loop maze-game paradigm",
+      "source": "prior_art.json",
+      "source_entry": 7
+    },
+    {
+      "id": "rel_15",
+      "from": "ent_21",
+      "to": "ent_23",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Need for fully synthetic closed-loop learning systems without external pharmacological dependencies",
+      "source": "prior_art.json",
+      "source_entry": 7
+    },
+    {
+      "id": "rel_16",
+      "from": "ent_24",
+      "to": "ent_25",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: DishBrain system integrating in vitro neural networks with in silico computing via high-density MEA for real-time closed-loop interaction in simulated Pong environment",
+      "source": "prior_art.json",
+      "source_entry": 8
+    },
+    {
+      "id": "rel_17",
+      "from": "ent_24",
+      "to": "ent_26",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Need for standardized closed-loop interfaces to enable reproducible complex task embodiment across labs",
+      "source": "prior_art.json",
+      "source_entry": 8
+    },
+    {
+      "id": "rel_18",
+      "from": "ent_27",
+      "to": "ent_28",
+      "type": "USES_METHOD",
+      "evidence": "Paper describes method: Compared learning efficiency of in vitro biological neural networks (DishBrain) to state-of-the-art deep RL algorithms (DQN, A2C, PPO) in simplified Pong simulation",
+      "source": "prior_art.json",
+      "source_entry": 9
+    },
+    {
+      "id": "rel_19",
+      "from": "ent_27",
+      "to": "ent_29",
+      "type": "SUGGESTS_EXPERIMENT",
+      "evidence": "Paper identifies gap: Need to understand mechanisms behind biological sample efficiency for hybrid bio-silicon learning systems",
+      "source": "prior_art.json",
+      "source_entry": 9
+    },
+    {
+      "id": "rel_20",
+      "from": "ent_40",
+      "to": "ent_41",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Pfister JP, Toyoizumi T, Barber D, Gerstner W. Triplets of Spikes in a Model of Spike Timing-Dependent Plasticity. J Neurosci. 2006;26(38):9673-9682.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 0
+    },
+    {
+      "id": "rel_21",
+      "from": "ent_42",
+      "to": "ent_43",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Synaptic modifications driven by spike-timing-dependent plasticity in weakly coupled bursting neurons (Exa.ai publication)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 1
+    },
+    {
+      "id": "rel_22",
+      "from": "ent_44",
+      "to": "ent_45",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Sj\u00f6str\u00f6m PJ, Turrigiano GG, Nelson SB. Rate, timing, and cooperativity jointly determine cortical synaptic plasticity. Neuron. 2001;32(6):1149-1164.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 2
+    },
+    {
+      "id": "rel_23",
+      "from": "ent_46",
+      "to": "ent_47",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Synaptic reshaping of plastic neuronal networks by periodic multichannel stimulation with single-pulse and burst stimuli. PMC9632832 (2022)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 3
+    },
+    {
+      "id": "rel_24",
+      "from": "ent_48",
+      "to": "ent_49",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Payeur A, et al. Burst-dependent synaptic plasticity can coordinate learning in hierarchical circuits. Nat Neurosci. 2021.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 4
+    },
+    {
+      "id": "rel_25",
+      "from": "ent_50",
+      "to": "ent_51",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Learning to control the brain through adaptive closed-loop patterned stimulation. J Neural Eng. 2020.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 5
+    },
+    {
+      "id": "rel_26",
+      "from": "ent_52",
+      "to": "ent_53",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Neural co-processors for restoring brain function: results from a cortical model of grasping. J Neural Eng. 2023.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 6
+    },
+    {
+      "id": "rel_27",
+      "from": "ent_54",
+      "to": "ent_55",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Closed-Loop Reinforcement Learning Based Deep Brain Stimulation Using SpikerNet. (Exa.ai publication)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 7
+    },
+    {
+      "id": "rel_28",
+      "from": "ent_56",
+      "to": "ent_57",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: A computationally efficient adaptive phase response curve estimator for real-time closed-loop neuromodulation. (Exa.ai publication)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 8
+    },
+    {
+      "id": "rel_29",
+      "from": "ent_58",
+      "to": "ent_59",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Hebbian plasticity induced by temporally coincident BCI enhances post-stroke motor recovery. medRxiv 2023.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 9
+    },
+    {
+      "id": "rel_30",
+      "from": "ent_60",
+      "to": "ent_61",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Hernandes et al. autoMEA: machine learning-based burst detection for multi-electrode array datasets. Front Neurosci. 2024.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 10
+    },
+    {
+      "id": "rel_31",
+      "from": "ent_62",
+      "to": "ent_63",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: MEA-NAP compares microscale functional connectivity, topology, and network dynamics in organoid or monolayer neuronal cultures. Cell Rep Methods. 2024.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 11
+    },
+    {
+      "id": "rel_32",
+      "from": "ent_64",
+      "to": "ent_65",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Data-driven burst shape analysis for functional phenotyping of neuronal cultures. (Exa.ai publication)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 12
+    },
+    {
+      "id": "rel_33",
+      "from": "ent_66",
+      "to": "ent_67",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Protocol for enhanced analysis of electrophysiological data from high-density MEAs with nicespike and spikeNburst. (PMC12681816, 2024)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 13
+    },
+    {
+      "id": "rel_34",
+      "from": "ent_68",
+      "to": "ent_69",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Protosequences in brain organoids model intrinsic brain states. bioRxiv 2023.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 14
+    },
+    {
+      "id": "rel_35",
+      "from": "ent_70",
+      "to": "ent_71",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Discovering a change point and piecewise linear structure in a time series of organoid networks via the iso-mirror. Appl Netw Sci. 2023.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 15
+    },
+    {
+      "id": "rel_36",
+      "from": "ent_72",
+      "to": "ent_73",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Development of neuronal timescales in human cortical organoids and rat hippocampus dissociated cultures. J Neurophysiol. 2024.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 16
+    },
+    {
+      "id": "rel_37",
+      "from": "ent_74",
+      "to": "ent_75",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Park et al. Modulation of neuronal activity in cortical organoids with bioelectronic delivery of ions and neurotransmitters. Cell Rep Methods. 2024.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 17
+    },
+    {
+      "id": "rel_38",
+      "from": "ent_76",
+      "to": "ent_77",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Human neural organoid microphysiological systems show the building blocks necessary for basic learning and memory. (Exa.ai publication)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 18
+    },
+    {
+      "id": "rel_39",
+      "from": "ent_78",
+      "to": "ent_79",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Electrical stimulation elicits space- and parameter-dependent spiking responses in human cortical organoids. (Exa.ai publication)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 19
+    },
+    {
+      "id": "rel_40",
+      "from": "ent_80",
+      "to": "ent_81",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Goal-directed learning in cortical organoids. Cell Rep. 2024 / bioRxiv 2024.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 20
+    },
+    {
+      "id": "rel_41",
+      "from": "ent_82",
+      "to": "ent_83",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: A feedback-driven brain organoid platform enables automated maintenance and high-resolution neural activity monitoring. bioRxiv 2024 / IoT 2025.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 21
+    },
+    {
+      "id": "rel_42",
+      "from": "ent_84",
+      "to": "ent_85",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Long-Term Potentiation and Closed-Loop Learning in Paired Brain Organoids for CNS Drug Discovery. bioRxiv 2025.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 22
+    },
+    {
+      "id": "rel_43",
+      "from": "ent_86",
+      "to": "ent_87",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Generation of 'semi-guided' cortical organoids with complex neural oscillations. Nat Protoc. 2024.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 23
+    },
+    {
+      "id": "rel_44",
+      "from": "ent_88",
+      "to": "ent_89",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Evaluating Encoding Strategies for Closed-Loop Classification in Biological Neural Networks. (Exa.ai publication - Cortical Labs CL-1)",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 24
+    },
+    {
+      "id": "rel_45",
+      "from": "ent_90",
+      "to": "ent_91",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Human-Derived Cortical Neurospheroids Coupled to Passive, High-Density and 3D MEAs. MDPI 2024.",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 25
+    },
+    {
+      "id": "rel_46",
+      "from": "ent_92",
+      "to": "ent_93",
+      "type": "USES_PROTOCOL",
+      "evidence": "Protocol from paper: Complex activity and short-term plasticity of human cerebral organoids reciprocally connected with axons. PMC11006899 (2024).",
+      "source": "neural_experimentation_protocols.json",
+      "source_entry": 26
+    },
+    {
+      "id": "rel_47",
+      "from": "ent_102",
+      "to": "ent_103",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Conceptual framework for OI field; 3D brain organoids + microfluidics + 3D MEA + AI/ML",
+      "source": "organoid_prior_art.json",
+      "source_entry": 0
+    },
+    {
+      "id": "rel_48",
+      "from": "ent_104",
+      "to": "ent_105",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: DishBrain: human/rodent cortical neurons on MaxWell HD-MEA (26,400 electrodes) + closed-loop Pong environment",
+      "source": "organoid_prior_art.json",
+      "source_entry": 1
+    },
+    {
+      "id": "rel_49",
+      "from": "ent_106",
+      "to": "ent_107",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Brainoware: human brain organoid on HD-MEA + reservoir computing framework for speech recognition & nonlinear prediction",
+      "source": "organoid_prior_art.json",
+      "source_entry": 2
+    },
+    {
+      "id": "rel_50",
+      "from": "ent_108",
+      "to": "ent_109",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Mouse cortical organoids on Maxwell HD-MEA + BrainDance closed-loop framework + cartpole (inverted pendulum) task",
+      "source": "organoid_prior_art.json",
+      "source_entry": 3
+    },
+    {
+      "id": "rel_51",
+      "from": "ent_110",
+      "to": "ent_111",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: PDMS-MEA chip with dual human cerebral organoids connected by guided axonal bundle (assembloid)",
+      "source": "organoid_prior_art.json",
+      "source_entry": 4
+    },
+    {
+      "id": "rel_52",
+      "from": "ent_112",
+      "to": "ent_113",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Embedded Electrode Array (EEA) platform: paired human iPSC-derived organoids + guided axonal interconnects + closed-loop maze-game paradigm",
+      "source": "organoid_prior_art.json",
+      "source_entry": 5
+    },
+    {
+      "id": "rel_53",
+      "from": "ent_114",
+      "to": "ent_115",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Dissociated hippocampal cultures on MEA + adaptive closed-loop stimulation with response-to-stimulus (R/S) threshold reinforcement",
+      "source": "organoid_prior_art.json",
+      "source_entry": 6
+    },
+    {
+      "id": "rel_54",
+      "from": "ent_116",
+      "to": "ent_117",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Critical review of OI field claims vs evidence",
+      "source": "organoid_prior_art.json",
+      "source_entry": 7
+    },
+    {
+      "id": "rel_55",
+      "from": "ent_118",
+      "to": "ent_119",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Human cortical organoids on HD-MEA + systematic electrical stimulation parameter sweep",
+      "source": "organoid_prior_art.json",
+      "source_entry": 8
+    },
+    {
+      "id": "rel_56",
+      "from": "ent_120",
+      "to": "ent_121",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: DishBrain (human/rodent neurons on HD-MEA) vs DQN, A2C, PPO on Pong",
+      "source": "organoid_prior_art.json",
+      "source_entry": 9
+    },
+    {
+      "id": "rel_57",
+      "from": "ent_122",
+      "to": "ent_123",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: 3D MEA: 8 independently positionable probes \u00d7 8 vertical electrodes = 64 channels, 360\u00b0 coverage, size-adjustable (1-3.7 mm organoids)",
+      "source": "organoid_prior_art.json",
+      "source_entry": 10
+    },
+    {
+      "id": "rel_58",
+      "from": "ent_124",
+      "to": "ent_125",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: UHD-CMOS MEA: 236,880 electrodes, 32.45 mm\u00b2, 10.52 \u03bcm pitch, 10 kSamples/s all channels, field potential imaging (FPI)",
+      "source": "organoid_prior_art.json",
+      "source_entry": 11
+    },
+    {
+      "id": "rel_59",
+      "from": "ent_126",
+      "to": "ent_127",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Stretchable mesh nanoelectronics integrated during organogenesis (2D-to-3D reconfiguration) for longitudinal single-cell mapping",
+      "source": "organoid_prior_art.json",
+      "source_entry": 12
+    },
+    {
+      "id": "rel_60",
+      "from": "ent_128",
+      "to": "ent_129",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Review/framework for SBI: neural cultures + digital computing + neurocomputational theory (FEP)",
+      "source": "organoid_prior_art.json",
+      "source_entry": 13
+    },
+    {
+      "id": "rel_61",
+      "from": "ent_130",
+      "to": "ent_131",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Multi-Agent Interaction System (MAIS): multiple brain organoids on reprogrammable MEA + compute chips, plasticity-driven closed-loop",
+      "source": "organoid_prior_art.json",
+      "source_entry": 14
+    },
+    {
+      "id": "rel_62",
+      "from": "ent_132",
+      "to": "ent_133",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: Bioelectronic ion pumps (hydrogel-based) for spatiotemporal K+/GABA delivery to mouse cortical organoids + calcium imaging",
+      "source": "organoid_prior_art.json",
+      "source_entry": 15
+    },
+    {
+      "id": "rel_63",
+      "from": "ent_134",
+      "to": "ent_135",
+      "type": "DESCRIBES_SYSTEM",
+      "evidence": "Paper describes system: RCCS (rotating cell culture system) & \u03bc-platform dynamic culture systems vs static/spinner for organoid maturation",
+      "source": "organoid_prior_art.json",
+      "source_entry": 16
+    }
+  ]
+}

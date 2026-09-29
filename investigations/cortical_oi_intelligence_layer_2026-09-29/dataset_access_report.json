@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "created": "2026-09-29",
+    "total_datasets_attempted": 3,
+    "disk_available_gb": 13
+  },
+  "datasets": [
+    {
+      "name": "Human forebrain organoids spontaneous activities spike data (Zenodo 18298694)",
+      "source": "Zenodo",
+      "url": "https://zenodo.org/records/18298694",
+      "files_downloaded": [
+        "Indiv_organoids.zip (7.6 MB)"
+      ],
+      "format": "MATLAB v7.3 (HDF5) .mat files",
+      "content": "41 organoid recordings, 8 channels each, 400s duration, 100 sweeps of 4s, spike times + amplitudes per channel",
+      "sample_analysis": {
+        "recording": "fs363-org0.mat",
+        "channels": 8,
+        "duration_seconds": 400,
+        "fs_id": 363,
+        "org_id": 0,
+        "n_blocks": 1,
+        "sweeps_per_block": 100,
+        "sweep_duration": 4,
+        "total_spikes_ch0": 297,
+        "total_spikes_ch1": 134,
+        "total_spikes_ch2": 14,
+        "total_spikes_ch3": 1166,
+        "total_spikes_ch4": 1183,
+        "total_spikes_ch5": 390,
+        "total_spikes_ch6": 473,
+        "total_spikes_ch7": 560,
+        "spike_rate_ch3": "~2.9 Hz",
+        "spike_rate_ch4": "~3.0 Hz"
+      },
+      "ingestion_status": "FORMAT_INCOMPATIBLE - requires conversion to Cortical HDF5 format or adaptation of cortical_cloud_bridge",
+      "compatibility_issues": [
+        "Data is in MATLAB HDF5 with object references (not Cortical HDF5 structure)",
+        "No stimulation events in this dataset (spontaneous only)",
+        "Requires custom parser or conversion to NWB/Cortical format"
+      ],
+      "recommendation": "Convert to NWB using NeuroConv or write custom adapter for cortical_cloud_bridge"
+    },
+    {
+      "name": "DANDI 001611 - Rat cortical cultures on HD-MEAs (draft)",
+      "source": "DANDI",
+      "url": "https://dandiarchive.org/dandiset/001611/draft",
+      "files_available": "2700 files, 39.9 GB total",
+      "format": "NWB (HDF5)",
+      "content": "Dissociated rat cortical cultures on HD-MEAs, repeated-stimulation experiment, 100 sessions \u00d7 27 experiments",
+      "access_method": "DANDI API streaming / partial download via NWB HDF5 backend",
+      "ingestion_status": "NOT_DOWNLOADED - too large for local disk, requires streaming",
+      "compatibility": "NWB format - compatible with SpikeInterface/Neo/PyNWB",
+      "recommendation": "Use DANDI API to stream individual NWB files; test with 1-2 files first"
+    },
+    {
+      "name": "DANDI 001603 - Human brain organoids (published)",
+      "source": "DANDI",
+      "url": "https://dandiarchive.org/dandiset/001603",
+      "files_available": "111 files, 322.2 GB total",
+      "format": "NWB (HDF5)",
+      "content": "Preconfigured neuronal firing sequences in human brain organoids",
+      "ingestion_status": "NOT_DOWNLOADED - VERY LARGE",
+      "compatibility": "NWB format - compatible with SpikeInterface/Neo/PyNWB",
+      "recommendation": "Stream via DANDI API if needed; prioritize 001611 as it has stimulation"
+    }
+  ],
+  "summary": {
+    "datasets_with_real_biology": 3,
+    "datasets_with_stimulation": 1,
+    "datasets_downloadable_within_disk": 1,
+    "datasets_streamable": 2,
+    "format_compatibility": "NWB (DANDI) > MATLAB HDF5 (Zenodo) > Cortical HDF5 (simulator)",
+    "next_steps": [
+      "Adapt cortical_cloud_bridge to read NWB format (using PyNWB/Neo)",
+      "Or convert Zenodo .mat files to NWB using NeuroConv",
+      "Stream DANDI 001611 files one at a time for stimulation response analysis",
+      "Test Investigation Machine on real biological data"
+    ]
+  }
+}

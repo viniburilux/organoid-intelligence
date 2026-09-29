@@ -1,0 +1,336 @@
+{
+  "metadata": {
+    "created": "2026-09-29",
+    "source": "software_inventory.json + cortical_oi_integration.py + cortical_cloud_bridge.py + subagent web research"
+  },
+  "tools": [
+    {
+      "name": "SpikeInterface",
+      "function": "Unified framework for spike sorting: load/preprocess recordings, run multiple sorters, post-process/curate, compute quality metrics, visualize. Supports 20+ file formats including HDF5 via Neo.",
+      "version": "0.105.0 (latest PyPI, 2025)",
+      "license": "MIT",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "high",
+      "build_if_missing": "Already mature; use directly. Our HDF5 recordings need a SpikeInterface RecordingExtractor subclass for native read. Minimal adapter (~200 lines) bridges our HDF5 schema to SpikeInterface API.",
+      "relevant_capabilities": [
+        "spike sorting",
+        "preprocessing",
+        "quality metrics",
+        "curation",
+        "burst detection (via postprocessing)",
+        "NWB/HDF5 I/O",
+        "cross-channel correlation",
+        "spike train analysis"
+      ]
+    },
+    {
+      "name": "Neo",
+      "function": "Core data model for electrophysiology (Block, Segment, AnalogSignal, SpikeTrain, Event, Epoch). IO layer reads/writes 30+ formats including HDF5. Foundation for Elephant, SpikeInterface, PyNN.",
+      "version": "0.14.5 (PyPI, 2026-06)",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "high",
+      "build_if_missing": "Directly usable. Our HDF5 can be read via Neo's HDF5IO or custom Neo IO subclass. Provides Quantities-aware arrays (units, metadata). Essential interoperability layer.",
+      "relevant_capabilities": [
+        "electrophysiology data structures",
+        "NWB/HDF5 I/O",
+        "spike train analysis",
+        "signal processing"
+      ]
+    },
+    {
+      "name": "PyNWB",
+      "function": "Standardized neurodata format (NWB) + Python API (PyNWB). Built on HDF5 via HDMF. Handles spikes, stimuli, behavior, imaging, metadata, provenance. Required for data sharing/reproducibility.",
+      "version": "4.1.0 (2025); NWB 2.5.0 spec; HDMF 6.2.0",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "high",
+      "build_if_missing": "Adopt NWB as primary storage format or add NWB export. PyNWB writes our HDF5 natively. Requires mapping our schema to NWB data types (TimeSeries, ElectricalSeries, StimulusSeries). One-time schema mapping effort (~1-2 weeks).",
+      "relevant_capabilities": [
+        "NWB format read/write",
+        "standardized metadata",
+        "HDF5 backend",
+        "provenance tracking"
+      ]
+    },
+    {
+      "name": "HDMF",
+      "function": "Hierarchical Data Modeling Framework underlying PyNWB. Specifies data models, handles HDF5/Zarr backends, object mapping, validation. Can be used independently for custom NWB-like schemas.",
+      "version": "6.2.0 (2025)",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "medium",
+      "build_if_missing": "Use if we need custom schema without full NWB overhead. Enables schema evolution, validation, Zarr backend. Learning curve; only worth it if NWB extension mechanism insufficient.",
+      "relevant_capabilities": []
+    },
+    {
+      "name": "Elephant",
+      "function": "Electrophysiology Analysis Toolkit: spike train statistics, spectral analysis, pairwise correlations, STA/STC, assembly detection, plasticity metrics. Input: Neo objects, quantities, numpy.",
+      "version": "1.2.1 (2024)",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.9",
+      "reuse_potential": "high",
+      "build_if_missing": "Directly usable on Neo-converted data. Provides STDP/burst analysis metrics (ISI, CV2, Fano factor, spike-triggered averages, cross-correlation histograms). No HDF5 dependency - works on in-memory Neo objects.",
+      "relevant_capabilities": [
+        "spike train analysis",
+        "burst detection",
+        "change point detection",
+        "cross-correlation",
+        "synchrony measures",
+        "anomaly detection",
+        "state transition detection"
+      ]
+    },
+    {
+      "name": "h5py",
+      "function": "Low-level and high-level Python interface to HDF5. Our recordings are native HDF5; h5py is the direct read/write layer. Required by PyNWB, HDMF, SpikeInterface (via Neo).",
+      "version": "3.16.0 (2025)",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "high",
+      "build_if_missing": "Already in stack. Use for custom HDF5 access, schema inspection, lightweight tools. No build needed.",
+      "relevant_capabilities": [
+        "HDF5 low-level I/O",
+        "custom data stream storage"
+      ]
+    },
+    {
+      "name": "dataprov",
+      "function": "Lightweight W3C PROV-JSON provenance tracking. Zero dependencies (stdlib only). Records entities, activities, agents, checksums, DRL, environment capture. CLI for visualization.",
+      "version": "3.2.0 (2024)",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.8",
+      "reuse_potential": "high",
+      "build_if_missing": "Integrate as provenance sidecar for every pipeline step. Wraps function calls, auto-generates SHA256, PROV-JSON output. Minimal integration effort (~1 day).",
+      "relevant_capabilities": []
+    },
+    {
+      "name": "Alpaca (alpaca-prov)",
+      "function": "Automated Lightweight Provenance Capture for Python scripts. Function decorator captures inputs/outputs/parameters, serializes to RDF/PROV-O. Designed for electrophysiology (Neo/Elephant examples).",
+      "version": "0.2.0 (2023-12)",
+      "license": "BSD",
+      "python_compatible": ">=3.8 (rdflib, networkx deps)",
+      "reuse_potential": "medium",
+      "build_if_missing": "Higher-level than dataprov; decorator-based, RDF output. Good for script-level provenance but adds rdflib dependency. Use if RDF/PROV-O required; otherwise dataprov simpler.",
+      "relevant_capabilities": []
+    },
+    {
+      "name": "cl-sdk (Cortical Labs SDK)",
+      "function": "CL API implementation for local development/simulation. 1:1 parity with CL1 hardware. Stimulation delivery (StimDesign, BurstDesign, StimPlan), 25 kHz loop, spike detection, HDF5 recording (spikes, stims, samples, data streams). Simulator replays recordings.",
+      "version": "1.0.0",
+      "license": "Proprietary (Cortical Labs); SDK free for development",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "high",
+      "build_if_missing": "Our stimulation delivery backbone. Already integrated. Extend with custom SimulatorDataSource for protocol replay. Closed-loop latency <1 ms on hardware; ~63 ms in simulator.",
+      "relevant_capabilities": []
+    },
+    {
+      "name": "SpikeSorting (via SpikeInterface)",
+      "function": "SpikeInterface wraps 10+ sorters (Kilosort, Mountainsort, SpyKING CIRCUS, Tridesclous, etc.). Post-processing: curation, quality metrics (isolation distance, L-ratio, SNR), comparison.",
+      "version": "Included in SpikeInterface 0.105.0",
+      "license": "MIT (SpikeInterface); sorters have individual licenses",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "high",
+      "build_if_missing": "Use SpikeInterface's run_sorter() API. Kilosort 2.5/3/4 requires CUDA; Mountainsort5 pure Python. Choose based on compute environment.",
+      "relevant_capabilities": [
+        "spike sorting",
+        "preprocessing",
+        "quality metrics",
+        "curation",
+        "burst detection (via postprocessing)",
+        "NWB/HDF5 I/O",
+        "cross-channel correlation",
+        "spike train analysis"
+      ]
+    },
+    {
+      "name": "Quantities",
+      "function": "Physical quantities with units (pq.nA, pq.ms, pq.mV). Underpins Neo arrays. Enables dimensional analysis, automatic unit conversion.",
+      "version": "0.15.0+",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.8",
+      "reuse_potential": "high",
+      "build_if_missing": "Transitive dependency via Neo/Elephant. Already available. Use for all stimulation parameters, timing, analysis.",
+      "relevant_capabilities": []
+    },
+    {
+      "name": "hdmf-zarr",
+      "function": "Zarr backend for HDMF/PyNWB. Enables cloud-object storage (S3, GCS, Azure) for NWB data. Chunked, compressed, parallel I/O.",
+      "version": "Latest tracked by HDMF/PyNWB",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "medium",
+      "build_if_missing": "Adopt when moving recordings to cloud storage. Requires Zarr v3 migration. Not urgent for local workflows.",
+      "relevant_capabilities": []
+    },
+    {
+      "name": "NDX Extensions / NWB Extensions",
+      "function": "NWB extensions for specific domains (behavior, optogenetics, intracellular, etc.). Reusable type definitions.",
+      "version": "Various",
+      "license": "BSD-3-Clause",
+      "python_compatible": ">=3.10",
+      "reuse_potential": "low",
+      "build_if_missing": "Only if we need standardized extensions (e.g., optogenetics, specific behavior). Otherwise extend NWB directly via HDMF spec.",
+      "relevant_capabilities": [
+        "NWB format read/write",
+        "standardized metadata",
+        "HDF5 backend",
+        "provenance tracking"
+      ]
+    }
+  ],
+  "our_pipeline_coverage": {
+    "cortical_oi_integration.py": {
+      "BurstAnalyzer": {
+        "capabilities": [
+          "burst detection (ISI-based)",
+          "burst prediction",
+          "prediction verification"
+        ],
+        "parameters": [
+          "min_spikes=3",
+          "max_isi_ms=15",
+          "prediction_window_ms=50"
+        ],
+        "uses_cl_sdk": true,
+        "reuses": []
+      },
+      "ResearchState": {
+        "capabilities": [
+          "hypothesis tracking",
+          "contradiction logging",
+          "question evolution"
+        ],
+        "reuses": []
+      },
+      "CorticalOIController": {
+        "capabilities": [
+          "CL SDK integration",
+          "closed-loop experiment execution",
+          "data stream persistence"
+        ],
+        "reuses": [
+          "TransitionMemory",
+          "ActiveUncertaintyAgent",
+          "StepRecord from OI Sandbox"
+        ]
+      }
+    },
+    "cortical_cloud_bridge.py": {
+      "CorticalCloudBridge": {
+        "capabilities": [
+          "HDF5 validation",
+          "spike/stim/sample extraction",
+          "data stream reading"
+        ],
+        "format_support": [
+          "Cortical HDF5 (simulator)",
+          "NWB (via Neo) - NOT YET IMPLEMENTED"
+        ]
+      },
+      "RealDataExperimentRunner": {
+        "capabilities": [
+          "burst characterization",
+          "stimulation response (PSTH)",
+          "state transitions (CUSUM)"
+        ],
+        "reuses": [
+          "BurstAnalyzer from cortical_oi_integration"
+        ]
+      }
+    },
+    "investigation_machine.py": {
+      "InvestigationMachine": {
+        "capabilities": [
+          "Phase 1: Characterization",
+          "Phase 2: Hypothesis testing with falsification",
+          "Phase 3: Discovery (temporal clustering, channel correlations, network bursts, anomalies)",
+          "Phase 4: Experiment design for Cloud",
+          "Provenance tracking",
+          "ResearchState integration"
+        ],
+        "reuses": [
+          "CorticalCloudBridge",
+          "RealDataExperimentRunner",
+          "BurstAnalyzer",
+          "ResearchState"
+        ]
+      }
+    }
+  },
+  "reuse_recommendations": [
+    {
+      "our_component": "BurstAnalyzer (custom ISI-based)",
+      "recommendation": "REUSE SpikeInterface burst detection + Elephant burst analysis for validation",
+      "effort": "MEDIUM - need to wrap SpikeInterface/Elephant calls",
+      "priority": "HIGH"
+    },
+    {
+      "our_component": "RealDataExperimentRunner burst characterization",
+      "recommendation": "ADAPT Elephant change point detection for state transitions instead of custom CUSUM",
+      "effort": "LOW - Elephant has change_point_detection module",
+      "priority": "HIGH"
+    },
+    {
+      "our_component": "Cross-channel correlation (custom)",
+      "recommendation": "REUSE SpikeInterface correlation analysis + Elephant synchrony measures",
+      "effort": "LOW",
+      "priority": "MEDIUM"
+    },
+    {
+      "our_component": "HDF5 data stream (custom msgpack)",
+      "recommendation": "ADAPT to NWB format using PyNWB for standard compatibility",
+      "effort": "HIGH - requires format conversion layer",
+      "priority": "MEDIUM"
+    },
+    {
+      "our_component": "Stimulation response analysis (custom PSTH)",
+      "recommendation": "REUSE Elephant PSTH + SpikeInterface peri-stimulus analysis",
+      "effort": "LOW",
+      "priority": "HIGH"
+    },
+    {
+      "our_component": "Anomaly detection (custom Z-score)",
+      "recommendation": "REUSE Elephant anomaly detection + SpikeInterface quality metrics",
+      "effort": "LOW",
+      "priority": "MEDIUM"
+    },
+    {
+      "our_component": "Latent dynamics (not implemented)",
+      "recommendation": "EXTEND with LFADS/GPFA via existing Python implementations",
+      "effort": "HIGH - requires external dependencies",
+      "priority": "LOW"
+    }
+  ],
+  "gaps": [
+    {
+      "capability": "NWB format support",
+      "status": "NOT IMPLEMENTED",
+      "needed_for": "DANDI dataset ingestion, standard compatibility",
+      "recommended_tool": "PyNWB + Neo NWBIO"
+    },
+    {
+      "capability": "Spike sorting integration",
+      "status": "NOT NEEDED (spikes already extracted in Cortical format)",
+      "notes": "Cortical SDK provides spike-sorted data"
+    },
+    {
+      "capability": "Real-time stimulation control",
+      "status": "PARTIAL (simulator only)",
+      "needed_for": "Live CL1 closed-loop",
+      "blocker": "CL SDK stimulation API not documented for programmatic use"
+    },
+    {
+      "capability": "Multi-session tracking / unit matching",
+      "status": "NOT IMPLEMENTED",
+      "needed_for": "Session drift analysis (EXP-010)",
+      "recommended_tool": "SpikeInterface UnitMatch"
+    },
+    {
+      "capability": "Latent dynamics / GPFA / LFADS",
+      "status": "NOT IMPLEMENTED",
+      "needed_for": "Burst prediction (HYP-005)",
+      "recommended_tool": "LFADS (TensorFlow) or GPFA (Elephant/sklearn)"
+    }
+  ]
+}
