@@ -1,0 +1,74 @@
+{
+ "1010": {
+  "awake": {
+   "lzc": 0.931039136415152,
+   "n_epochs": 22,
+   "n_ch": 62,
+   "ic_removed": 0,
+   "bad_epochs": 1,
+   "sec": 15
+  },
+  "sed": {
+   "lzc": 0.9054321203202226,
+   "n_epochs": 21,
+   "n_ch": 62,
+   "ic_removed": 2,
+   "bad_epochs": 2,
+   "sec": 10
+  }
+ },
+ "1017": {
+  "awake": {
+   "lzc": 0.9057283908932395,
+   "n_epochs": 23,
+   "n_ch": 62,
+   "ic_removed": 0,
+   "bad_epochs": 0,
+   "sec": 11
+  },
+  "sed": {
+   "lzc": 0.9430221872128133,
+   "n_epochs": 20,
+   "n_ch": 62,
+   "ic_removed": 0,
+   "bad_epochs": 3,
+   "sec": 10
+  }
+ },
+ "1024": {
+  "awake": {
+   "lzc": 0.9106453563733315,
+   "n_epochs": 23,
+   "n_ch": 62,
+   "ic_removed": 0,
+   "bad_epochs": 0,
+   "sec": 10
+  },
+  "sed": {
+   "lzc": 0.9167830327726562,
+   "n_epochs": 23,
+   "n_ch": 62,
+   "ic_removed": 1,
+   "bad_epochs": 0,
+   "sec": 10
+  }
+ },
+ "1036": {
+  "awake": {
+   "lzc": 0.9050469726304246,
+   "n_epochs": 23,
+   "n_ch": 62,
+   "ic_removed": 0,
+   "bad_epochs": 0,
+   "sec": 10
+  },
+  "sed": {
+   "lzc": 0.9122333676106775,
+   "n_epochs": 23,
+   "n_ch": 62,
+   "ic_removed": 0,
+   "bad_epochs": 0,
+   "sec": 10
+  }
+ }
+}
